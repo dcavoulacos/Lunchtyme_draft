@@ -155,17 +155,10 @@ DEPENDENCIES
   koala (~> 1.7.0rc1)
   omniauth-facebook
   quiet_assets
-<<<<<<< HEAD
   rails (= 4.0.0.rc1)
   sass-rails (~> 4.0.0.rc1)
   sdoc
-  simple_form
-=======
-  rails (= 4.0.0)
-  sass-rails (~> 4.0.0)
-  sdoc
   simple_form (~> 3.0.0.rc)
->>>>>>> 9439b2c42b3d539c7e06e799d7af9159623fb1af
   sqlite3
   therubyracer
   turbolinks

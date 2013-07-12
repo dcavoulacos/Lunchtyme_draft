@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :schedules
 
 	def self.from_omniauth(auth)
 		where(auth.slice(:provider, :facebook_id)).first_or_initialize.tap do |user|
