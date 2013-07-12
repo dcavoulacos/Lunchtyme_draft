@@ -65,6 +65,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
@@ -84,6 +85,10 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     polyglot (0.3.3)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -117,6 +122,7 @@ GEM
     simple_form (3.0.0.rc)
       actionpack (>= 4.0.0.rc1, < 4.1)
       activemodel (>= 4.0.0.rc1, < 4.1)
+    slop (3.4.5)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -154,6 +160,7 @@ DEPENDENCIES
   jquery-rails
   koala (~> 1.7.0rc1)
   omniauth-facebook
+  pry
   quiet_assets
   rails (= 4.0.0.rc1)
   sass-rails (~> 4.0.0.rc1)

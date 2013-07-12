@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20130712191750) do
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "friends"
   end
 
 end
