@@ -46,9 +46,13 @@ end
 
 gem 'omniauth-facebook'
 
-gem 'koala', '~> 1.7.0rc1'
+gem "koala", "~> 1.7.0rc1"
 
 gem 'quiet_assets'
 gem 'better_errors'
+#gem 'rails_12factor', group: :production
+#gem 'pry'
+#gem 'pry-debugger'
 
-gem 'simple_form'
+
+gem "simple_form", "~> 3.0.0.rc"
