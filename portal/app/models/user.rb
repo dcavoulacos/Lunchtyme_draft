@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
 			user.provider = auth.provider
 			user.facebook_id = auth.uid
 			user.name = auth.info.name
+			user.email = auth.info.email
+			#user.phone =
+			#user.gender = 
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			user.save!
@@ -12,5 +15,5 @@ class User < ActiveRecord::Base
 	end
 
 
-	
+
 end
