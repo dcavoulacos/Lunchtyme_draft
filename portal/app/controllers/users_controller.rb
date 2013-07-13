@@ -19,6 +19,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @id = params[:id]
+    if @id.nil?
+      @user = User.find(current_user.id)
+    else
+      @user = User.find(@id)
+    end
   end
 
   # POST /users
@@ -54,18 +60,31 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
-    session[:id] = nil
+    #delete their schedule and matches eventually
+  
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { 
+        if session[:id] == @user.id
+            session[:id] = nil
+            redirect_to logout_path
+        else
+            redirect_to users_path
+        end
+      }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+     def set_user
+      if params[:id] == nil
+        @user = current_user
+      else
+        @user = User.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
