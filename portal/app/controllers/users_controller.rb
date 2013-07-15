@@ -1,3 +1,9 @@
+#require 'rubygems'
+#require 'rbconfig'
+#require 'mechanize'
+#require 'open-uri'
+
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -15,6 +21,11 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+
+    #@net_id = session[:cas_user]
+    #@user.netid = @net_id
+    #@user.search_ldap(@net_id)
+    #@user.get_user if @user.first_name.nil?
   end
 
   # GET /users/1/edit

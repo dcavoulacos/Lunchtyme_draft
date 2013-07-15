@@ -1,3 +1,6 @@
+#require 'net/ldap'
+#require 'mechanize'
+
 class User < ActiveRecord::Base
 
 	serialize :friends
@@ -22,20 +25,85 @@ class User < ActiveRecord::Base
 
 
 
-	# def pull_facebook_friends
-	# 	#oauth_access_token = Koala::Facebook::OAuth.new('598601033518548', 'a091edbee36349bac46a242c6131e778', 'auth/:provider/callback')
-	# 	#binding.pry
-	# 	#profile = @graph.get_object("me")
-	# 	@graph = Koala::Facebook::API.new(self.oauth_token)
-	# 	friendlist = @graph.get_connections("me", "friends")
-		
-	# 	self.friends = friendlist
-	# end
+
+
+
+
+
+
+
+
+
+
+
 	
+	# NAME = KNOWN_AS = /^\s*Name:\s*$/i
+	# KNOWN_AS = /^\s*Known As:\s*$/i
+	# EMAIL = /^\s*Email Address:\s*$/i
+	# YEAR = /^\s*Class Year:\s*$/i
+	# SCHOOL = /^\s*Division:\s*$/i
+	# COLLEGE = /^\s*Residential College:\s*$/i
+	# LEAD_SPACE = /^\s+/
+	# TRAIL_SPACE = /\s+$/
+
+	# def make_cas_browser
+	#   browser = Mechanize.new
+	#   browser.get( 'https://secure.its.yale.edu/cas/login' )
+	#   form = browser.page.forms.first
+	#   form.username = ENV['netid']
+	#   form.password = ENV['netid_password']
+	#   form.submit
+	#   browser
+	# end
+
+	# def get_user
+	#   browser = make_cas_browser
+	#   netid = self.netid
+
+	#   browser.get("http://directory.yale.edu/phonebook/index.htm?searchString=uid%3D#{netid}")
+
+	#   fname = ""
+	#   browser.page.search('tr').each do |tr|
+	#     field = tr.at('th').text
+	#     value = tr.at('td').text.sub(LEAD_SPACE, '').sub(TRAIL_SPACE, '')
+	#     case field
+	#     when NAME
+	#       name = value.split(' ')
+	#       fname = name.first
+	#       self.last_name = name.last
+	#       self.first_name = fname 
+	#     when KNOWN_AS
+	#       self.first_name = value
+	#     when EMAIL
+	#   	  self.email = value
+	#     when COLLEGE
+	#       self.college = value
+	#     end
+	#     self.college ||= "YC"
+	#   end
+	#   self.get_bio(fname, self.last_name)
+	# end
 
 
-
-
+	# def search_ldap(login)
+	#     ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
+	#     filter = Net::LDAP::Filter.eq("uid", login)
+	#     attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
+	#              "mail", "collegename", "curriculumshortname", "college", "class"]
+	#     result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
+	# 	if !result.empty?
+	# 		fname  = result[0][:givenname][0]
+	# 		self.first_name = fname
+	# 		self.last_name   = result[0][:sn][0]
+	#     	@nickname = result[0][:eduPersonNickname]
+	# 		if !@nickname.empty?
+	# 		    self.first_name  = @nickname[0]
+	# 		end
+	# 		self.email   = result[0][:mail][0]
+	# 		self.college = result[0][:college][0]
+	# 		#self.get_bio(fname, self.last_name)
+	# 	end
+	# end
 
 
 end
