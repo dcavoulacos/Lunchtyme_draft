@@ -22,10 +22,10 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    #@net_id = session[:cas_user]
-    #@user.netid = @net_id
-    #@user.search_ldap(@net_id)
-    #@user.get_user if @user.first_name.nil?
+    @net_id = session[:cas_user]
+    @user.netid = @net_id
+    @user.search_ldap(@net_id)
+    @user.get_user if @user.first_name.nil?
   end
 
   # GET /users/1/edit
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
      def set_user
       if params[:id] == nil
-        @user = current_user
+        @user = @current_user
       else
         @user = User.find(params[:id])
       end
@@ -100,6 +100,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
+      params.require(:user).permit(:name,:first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
     end
 end

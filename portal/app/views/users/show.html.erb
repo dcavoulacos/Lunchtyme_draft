@@ -5,11 +5,18 @@
 
 <%# current_user.pull_facebook_friends %>
 
+<% @friendlist = [] %>
+
+<% @user.friends.each do |friend|  %>
+  <% if !User.where(name: friend.values[0]).empty? %>
+   <% @friendlist << friend.values[0] %>
+  <% end  %>
+<% end  %>
+
+<br><%= "Your Friends Using LunchtYme are #{@friendlist}" %>
 
 
-
-
-
+<br><br>Personal Information <br>
 <p>
   <strong>Name:</strong>
   <%= @user.name %>
@@ -40,10 +47,7 @@
   <%= @user.gender %>
 </p>
 
-<p>
-  <strong>Facebook:</strong>
-  <%= @user.facebook_id %>
-</p>
+
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
