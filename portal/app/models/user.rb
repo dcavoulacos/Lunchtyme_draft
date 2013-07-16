@@ -3,8 +3,12 @@
 
 class User < ActiveRecord::Base
 
-	#serialize :friends
 
+	#serialize :friends
+	has_many :pending_matches,
+         :through => :matchings,
+         :source => :match,
+         :conditions => "confirmed = 0"  # assuming 0 means 'pending'
 
 	def self.from_omniauth(auth)
 
