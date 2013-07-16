@@ -2,15 +2,15 @@
 
 <%# current_user.pull_facebook_friends %>
 
-<% @friendlist = [] %>
+<%# @friendlist = [] %>
 
-<% @user.friends.each do |friend|  %>
-  <% if !User.where(name: friend.values[0]).empty? %>
-   <% @friendlist << friend.values[0] %>
-  <% end  %>
-<% end  %>
+<%# current_user.friends.each do |friend|  %>
+  <%# if !User.where(name: friend.values[0]).empty? %>
+   <%# @friendlist << friend.values[0] %>
+  <%# end  %>
+<%# end  %>
 
-<br><%= "Your Friends Using LunchtYme are #{@friendlist}" %>
+<br><%#= "Your Friends Using LunchtYme are #{@friendlist}" %>
 
 
 <br><br>Personal Information <br>
