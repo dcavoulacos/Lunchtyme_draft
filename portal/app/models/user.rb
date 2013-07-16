@@ -20,8 +20,6 @@ class User < ActiveRecord::Base
 		end
 	end
 
-
-
 	# def pull_facebook_friends
 	# 	#oauth_access_token = Koala::Facebook::OAuth.new('598601033518548', 'a091edbee36349bac46a242c6131e778', 'auth/:provider/callback')
 	# 	#binding.pry
@@ -31,11 +29,5 @@ class User < ActiveRecord::Base
 		
 	# 	self.friends = friendlist
 	# end
-	
-
-
-
-
-
 
 end
