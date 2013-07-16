@@ -1,1 +1,7 @@
 <h1>Schedules for <%= current_user.name %> </h1>
+
+<% @schedules.each do |schedule| %>
+	This is schedule #<%= schedule.id %>.<br>
+<% end %>
+<br><br>
+<%= link_to "Create New Schedule", new_schedule_path %>

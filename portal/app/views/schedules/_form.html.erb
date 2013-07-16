@@ -1,0 +1,12 @@
+<%= simple_form_for(@schedule) do |f| %>
+
+	<%= f.input :day %><br>
+
+	<%= f.input :start_time, collection: 11..15 %><br>
+
+	<%= f.input :end_time %><br>
+
+	<%= f.input	:location %><br>
+
+	<%= f.submit %>
+<% end %>
