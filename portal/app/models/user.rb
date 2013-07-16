@@ -3,13 +3,13 @@
 
 class User < ActiveRecord::Base
 
-	serialize :friends
+	#serialize :friends
 
 
 	def self.from_omniauth(auth)
 
 		where(auth.slice(:provider, :facebook_id)).first_or_initialize.tap do |user|
-			User.new
+			
 			user.provider = auth.provider
 			user.facebook_id = auth.uid
 			user.name = auth.info.name
