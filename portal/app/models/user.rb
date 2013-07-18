@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
 			end
 			self.email   = result[0][:mail][0]
 			self.res_college = result[0][:college][0]
+			self.class_year = result[0][:class][0]
 		end
 	end
 

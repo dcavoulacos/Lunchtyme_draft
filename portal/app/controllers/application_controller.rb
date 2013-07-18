@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action CASClient::Frameworks::Rails::Filter,  :unless => :skip_login?
-  before_action :create_new_user_if_not_exist
+  before_action :create_new_user_if_not_exist , except: [:logout]
 
   before_action :current_user
   helper_method :current_user
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-  	@current_user ||= User.find_by(netid: session[:cas_user]) if session[:cas_user]
+  	@current_user ||= User.find_by(netid: session[:cas_user])
   end
 
   def create_new_user_if_not_exist
