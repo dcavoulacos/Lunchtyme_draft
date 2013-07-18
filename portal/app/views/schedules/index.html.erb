@@ -1,9 +1,13 @@
 <h1>Schedules for <%= current_user.name %> </h1>
 
 <% @schedules.each do |schedule| %>
-	This is schedule ID:<%= schedule.id %>.<br>
-	<%= current_user.first_name %> is free at <%= schedule.location %> from:<br>
-	<%= schedule.start_time %> to <%= schedule.end_time %>.
+  This is schedule ID:<%= schedule.id %>.<br>
+  <%= current_user.first_name %> is free at <%= schedule.location %> from:<br>
+  <%= schedule.start_time %> to <%= schedule.end_time %>.
 <% end %>
 <br><br>
-<%= link_to "Create New Schedule", new_schedule_path %>
+<% if current_user.schedules.where("day = ?", Time.now.strftime("%A")).present? %>
+  <%= link_to "Set Your Schedule", edit_schedule_path(current_user.schedules.find_by_day(Time.now.strftime("%A"))) %>
+<% else %>
+  <%= link_to "Create Your Schedule", new_schedule_path %>
+<% end  %>
