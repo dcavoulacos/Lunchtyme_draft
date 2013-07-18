@@ -11,21 +11,17 @@ class User < ActiveRecord::Base
          :source => :match,
          :conditions => "confirmed = 0"  # assuming 0 means 'pending'
 
-	def self.from_omniauth(auth)		
-
-
-		where(auth.slice(:provider, :facebook_id)).first_or_initialize.tap do |user|
-			user.provider = auth.provider
-			user.facebook_id = auth.uid
-			user.name = auth.info.name
-			user.email = auth.info.email
-			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
-			user.oauth_token = auth.credentials.token
-			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-			@graph = Koala::Facebook::API.new(user.oauth_token)
-  		    user.friends = @graph.get_connections("me", "friends")
-			user.save!
-		end
+	def self.update_via_omniauth!(auth, user)		
+		user.provider = auth.provider
+		user.facebook_id = auth.uid
+		user.name = auth.info.name
+		user.email = auth.info.email
+		#"https://graph.facebook.com/1463020126?fields=gender,first_name"
+		user.oauth_token = auth.credentials.token
+		user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+		@graph = Koala::Facebook::API.new(user.oauth_token)
+	    user.friends = @graph.get_connections("me", "friends")
+		user.save!
 	end
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i

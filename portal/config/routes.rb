@@ -3,7 +3,7 @@ Portal::Application.routes.draw do
   resources :users
   resources :schedules  
 
-  get 'auth/:provider/callback', to: 'sessions#login'
+  get 'auth/:provider/callback', to: 'facebook#update', as: :facebook_update
   #match 'auth/failure', to: redirect('/'), via [:get, :post]
   get '/logout', to: 'sessions#logout', as: :logout
   get '/login', to: 'sessions#login', as: :login

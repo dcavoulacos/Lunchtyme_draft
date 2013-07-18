@@ -34,7 +34,6 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
-    render text: "You may only edit your own user details." unless @user == @current_user
   end
 
   # POST /users
@@ -93,6 +92,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
+      params.require(:user).permit(:name,:first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
     end
 end
