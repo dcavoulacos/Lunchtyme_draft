@@ -16,14 +16,12 @@ ActiveRecord::Schema.define(version: 20130712195920) do
   create_table "schedules", force: true do |t|
     t.integer  "user_id"
     t.datetime "day"
-    t.integer  "start_time"
-    t.integer  "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "schedules", ["user_id"], name: "index_schedules_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

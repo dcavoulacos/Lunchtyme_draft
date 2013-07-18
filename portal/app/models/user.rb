@@ -25,18 +25,6 @@ class User < ActiveRecord::Base
 	end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	# NAME = KNOWN_AS = /^\s*Name:\s*$/i
 	# KNOWN_AS = /^\s*Known As:\s*$/i

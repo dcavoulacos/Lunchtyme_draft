@@ -13,7 +13,8 @@ class SchedulesController < ApplicationController
 		@schedule = Schedule.new
 	end
 
-	def edit		
+	def edit
+		@id = params[:id]		
 	end
 
 	def create		
