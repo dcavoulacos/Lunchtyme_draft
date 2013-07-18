@@ -6,6 +6,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :create_new_user_if_not_exist, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -21,10 +22,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-
-    @net_id = session[:cas_user]
-    @user.netid = @net_id
-    @user.search_ldap(@net_id)
+    @user.search_ldap(session[:cas_user])
     @user.get_user if @user.first_name.nil?
   end
 
@@ -42,7 +40,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @user.netid = session[:cas_user]
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
