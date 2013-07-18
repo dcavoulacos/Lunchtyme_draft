@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20130716134818) do
 
   create_table "matchings", force: true do |t|
@@ -23,7 +22,6 @@ ActiveRecord::Schema.define(version: 20130716134818) do
   end
 
   add_index "matchings", ["user_id", "match_id"], name: "index_matchings_on_user_id_and_match_id"
-
 
   create_table "users", force: true do |t|
     t.string   "name"

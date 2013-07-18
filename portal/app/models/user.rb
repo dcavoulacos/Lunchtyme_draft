@@ -4,7 +4,7 @@
 class User < ActiveRecord::Base
 
 
-	#serialize :friends
+	serialize :friends
 	has_many :pending_matches,
          :through => :matchings,
          :source => :match,
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	def self.from_omniauth(auth)
 
 		where(auth.slice(:provider, :facebook_id)).first_or_initialize.tap do |user|
-			
+			#user = User.new
 			user.provider = auth.provider
 			user.facebook_id = auth.uid
 			user.name = auth.info.name
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
-			user.friends = @graph.get_connections("me", "friends")	
+        	user.friends = @graph.get_connections("me", "friends")
 			user.save!
 		end
 	end

@@ -12,8 +12,8 @@
    
     <%= f.input :gender, priority: [ " " ], collection: [ "Male", "Female", " "]%><br>
  
-    <%= f.hidden_field :facebook_id %>
-    <%= f.hidden_field :friends %>
+    <%= f.input :facebook_id %>
+    <%= f.input :friends %>
     <%= f.submit 'Update Profile' %>
 
 <% end %>
