@@ -3,13 +3,12 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Class year</th>
-      <th>Res college</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Gender</th>
-      <th>Facebook</th>
+      <th>Name </th>
+      <th>Class year </th>
+      <th>College </th>
+      <th>Email </th>
+      <th>Phone </th>
+      <th>Gender </th>
       <th></th>
       <th></th>
       <th></th>
@@ -25,10 +24,11 @@
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
         <td><%= user.gender %></td>
-        <td><%= user.facebook_id %></td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if @current_user == user %>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130712195920) do
+ActiveRecord::Schema.define(version: 20130716134818) do
+
+  create_table "matchings", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+  end
+
+  add_index "matchings", ["user_id", "match_id"], name: "index_matchings_on_user_id_and_match_id"
 
   create_table "schedules", force: true do |t|
     t.integer  "user_id"
@@ -37,6 +47,9 @@ ActiveRecord::Schema.define(version: 20130712195920) do
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
     t.string   "friends"
+    t.string   "netid"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
 end
