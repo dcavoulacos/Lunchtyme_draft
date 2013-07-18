@@ -10,7 +10,7 @@
 
 	<div id="container">
 		<div id="user_nav">
-			<% if current_user %>
+			<% if @current_user %>
 				Hello, <strong><%= @current_user.first_name %></strong>!
 				<%= link_to "Sign out of LunchtYme", logout_path, id: "sign_out" %>
 			<% else %>

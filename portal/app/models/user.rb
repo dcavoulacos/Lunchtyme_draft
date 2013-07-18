@@ -2,6 +2,7 @@
 #require 'mechanize'
 
 class User < ActiveRecord::Base
+	has_many :schedules
 
 
 	serialize :friends
@@ -26,19 +27,6 @@ class User < ActiveRecord::Base
 			user.save!
 		end
 	end
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
 	KNOWN_AS = /^\s*Known As:\s*$/i
