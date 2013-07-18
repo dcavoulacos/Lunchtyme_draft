@@ -1,7 +1,7 @@
 Portal::Application.routes.draw do
   root 'users#index'
   resources :users
-  
+  resources :schedules  
 
   get 'auth/:provider/callback', to: 'sessions#login'
   #match 'auth/failure', to: redirect('/'), via [:get, :post]

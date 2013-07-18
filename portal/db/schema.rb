@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20130716134818) do
 
   add_index "matchings", ["user_id", "match_id"], name: "index_matchings_on_user_id_and_match_id"
 
+  create_table "schedules", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "day"
+    t.string   "start_time", limit: nil
+    t.string   "end_time",   limit: nil
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.integer  "class_year"

@@ -2,9 +2,10 @@
 #require 'mechanize'
 
 class User < ActiveRecord::Base
+	has_many :schedules
 
 
-	#serialize :friends
+	serialize :friends
 	has_many :pending_matches,
          :through => :matchings,
          :source => :match,
@@ -13,7 +14,7 @@ class User < ActiveRecord::Base
 	def self.from_omniauth(auth)
 
 		where(auth.slice(:provider, :facebook_id)).first_or_initialize.tap do |user|
-			
+			#user = User.new
 			user.provider = auth.provider
 			user.facebook_id = auth.uid
 			user.name = auth.info.name
@@ -23,23 +24,10 @@ class User < ActiveRecord::Base
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
-			user.friends = @graph.get_connections("me", "friends")	
+        	user.friends = @graph.get_connections("me", "friends")
 			user.save!
 		end
 	end
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
 	KNOWN_AS = /^\s*Known As:\s*$/i
@@ -103,6 +91,7 @@ class User < ActiveRecord::Base
 			end
 			self.email   = result[0][:mail][0]
 			self.res_college = result[0][:college][0]
+			self.class_year = result[0][:class][0]
 		end
 	end
 
