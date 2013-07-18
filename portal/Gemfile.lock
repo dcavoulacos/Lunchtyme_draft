@@ -191,9 +191,9 @@ DEPENDENCIES
   omniauth-facebook
   pry
   quiet_assets
-  rails (= 4.0.0)
+  rails (= 4.0.0.rc1)
   rubycas-client (= 2.3.10.rc1)
-  sass-rails (~> 4.0.0)
+  sass-rails (~> 4.0.0.rc1)
   sdoc
   simple_form (~> 3.0.0.rc)
   sqlite3

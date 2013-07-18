@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20130716134818) do
   create_table "schedules", force: true do |t|
     t.integer  "user_id"
     t.datetime "day"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.string   "start_time", limit: nil
+    t.string   "end_time",   limit: nil
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
