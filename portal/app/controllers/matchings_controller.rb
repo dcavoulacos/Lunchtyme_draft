@@ -9,7 +9,7 @@ class MatchingsController < ApplicationController
 	    respond_to do |format|
 	        format.html { redirect_to users_path, notice: 'Match preference noted.' }
 	    end
-	end
+	  end
   end
   
   def destroy
