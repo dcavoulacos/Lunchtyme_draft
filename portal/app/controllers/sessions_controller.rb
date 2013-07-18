@@ -4,10 +4,11 @@ class SessionsController < ApplicationController
 
 	def login
 		session[:id] = nil
+		
 		@current_user = User.from_omniauth(env["omniauth.auth"])
 		#@current_user.res_college = self.college
 		session[:id] = @current_user.id
-		redirect_to root_path		
+		redirect_to root_path	
 	end
 
 	def logout

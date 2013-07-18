@@ -10,15 +10,9 @@
 
 	<div id="container">
 		<div id="user_nav">
-<<<<<<< HEAD
-			<% if current_user %>
-				Signed in as <strong><%= current_user.name %> </strong>
-				<%= link_to "Sign out", logout_path, id: "sign_out" %>
-=======
 			<% if @current_user %>
 				Hello, <strong><%= @current_user.first_name %></strong>!
 				<%= link_to "Sign out of LunchtYme", logout_path, id: "sign_out" %>
->>>>>>> 20113ed4f992d427c27488bc4458220a432c0a3c
 			<% else %>
 				<%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
 			<% end %>
