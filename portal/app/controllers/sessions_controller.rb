@@ -4,9 +4,8 @@ class SessionsController < ApplicationController
 
 	def login
 		session[:id] = nil
-		
+		#@current_user.from_omniauth(env["omniauth.auth"])
 		@current_user = User.from_omniauth(env["omniauth.auth"])
-		#@current_user.res_college = self.college
 		session[:id] = @current_user.id
 		redirect_to root_path	
 	end
@@ -16,6 +15,5 @@ class SessionsController < ApplicationController
 		@current_user = nil
 		session[:id] = nil
 		CASClient::Frameworks::Rails::Filter.logout(self, root_path)
-		#redirect_to root_url
 	end
 end
