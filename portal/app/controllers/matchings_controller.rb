@@ -1,4 +1,5 @@
 class MatchingsController < ApplicationController
+
   def create
     current_user.matchings.create(match_id: params[:match_id], status: 'pending')
     respond_to do |format|
@@ -20,12 +21,16 @@ class MatchingsController < ApplicationController
   end
   
   def destroy
-    @matching = current_user.matchings.find(params[:matching_id])
+    @matching = Matching.find(params[:matching])
     @matching.destroy
     respond_to do |format|
       format.html { redirect_to users_path }
       format.json { head :no_content }
     end
+  end
+
+  def index
+    @matchings = Matching.all
   end
 
   private
