@@ -10,9 +10,9 @@ class User < ActiveRecord::Base
 	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
 
 	def self.update_via_omniauth!(auth, user)
-		#if user.facebook_id == nil		
+		if user.facebook_id == nil		
 			user.provider = auth.provider
-			user.facebook_id = auth.uid
+			user.facebook_id = auth.uid.to_s
 			user.name = auth.info.name
 			user.email = auth.info.email
 			user.oauth_token = auth.credentials.token
@@ -20,15 +20,15 @@ class User < ActiveRecord::Base
 			@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.friends = @graph.get_connections("me", "friends")
 			user.save!
-		#elsif user.facebook_id == auth.uid
-		#	user.oauth_token = auth.credentials.token
-		#	user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-		#	@graph = Koala::Facebook::API.new(user.oauth_token)
-		#	user.friends = @graph.get_connections("me", "friends")
-		#	user.save!
-		#else
-	#	"You are not logged in with your own Facebook Account!"
-	#	end
+		elsif user.facebook_id.to_s == auth.uid.to_s
+			user.oauth_token = auth.credentials.token
+			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+			@graph = Koala::Facebook::API.new(user.oauth_token)
+			user.friends = @graph.get_connections("me", "friends")
+			user.save!
+		else
+			"You are not logged in with your own Facebook Account!"
+		end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
 
