@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 	has_many :schedules
 	serialize :friends
 	has_many :matchings, :dependent => :destroy
-	has_many :matches, -> { where("status = 'accepted'") }, :through => :matchings
-	has_many :requested_matches, -> { where("status = 'requested'").order(:created_at) }, :through => :matchings, :source => :match
-	has_many :pending_matches, -> { where("status = 'pending'").order(:created_at) }, :through => :matchings, :source => :match
+	has_many :matches, :through => :matchings, :conditions => "status = 'accepted'"
+	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
+	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
 
 	def self.update_via_omniauth!(auth, user)
 		#if user.facebook_id == nil		
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 			@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.friends = @graph.get_connections("me", "friends")
 			user.save!
-		#elsif user.facebook_id == auth.uid.to_i
+		#elsif user.facebook_id == auth.uid
 		#	user.oauth_token = auth.credentials.token
 		#	user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 		#	@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -32,9 +32,12 @@ class User < ActiveRecord::Base
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
 
+
+
+
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
-	KNOWN_AS ||= /^\s*Known As:\s*$/i
+	KNOWN_AS = /^\s*Known As:\s*$/i
 	EMAIL = /^\s*Email Address:\s*$/i
 	YEAR = /^\s*Class Year:\s*$/i
 	SCHOOL = /^\s*Division:\s*$/i
@@ -98,5 +101,4 @@ class User < ActiveRecord::Base
 			self.class_year = result[0][:class][0]
 		end
 	end
-
 end
