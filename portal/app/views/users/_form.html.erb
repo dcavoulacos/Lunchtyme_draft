@@ -10,13 +10,13 @@
 
     <%= f.input :email, input_html: { maxlength: 30 }, label: 'Convenient Email Address' %><br>
 
-    <%= f.input :phone, input_html: {maxlength: 10}, label: 'Cell Phone Number' %><br>
+    <%= f.input :phone, input_html: {maxlength: 10}, autofocus: true, label: 'Cell Phone Number' %><br>
    
     <%= f.input :gender, priority: [ " " ], collection: [ "Male", "Female", " "]%><br>
  
-    <%= f.input :facebook_id %>
-    <%= f.input :friends %>
-    <%= f.input :netid, value: session[:cas_user] %>
+    <%= f.hidden_field :facebook_id %>
+    <%= f.hidden_field :friends %>
+    <%= f.hidden_field :netid, value: session[:cas_user] %>
 
 
     <%= f.submit 'Update Profile' %>
