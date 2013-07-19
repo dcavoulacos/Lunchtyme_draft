@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
 			user.facebook_id = auth.uid
 			user.name = auth.info.name
 			user.email = auth.info.email
-		elsif user.facebook_id == auth.uid
+		end
+
+		if user.facebook_id == auth.uid
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -26,6 +28,13 @@ class User < ActiveRecord::Base
 		end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
+	
+
+
+
+
+
+
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
 	KNOWN_AS = /^\s*Known As:\s*$/i
