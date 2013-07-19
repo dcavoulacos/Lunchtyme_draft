@@ -1,0 +1,25 @@
+<h1>Listing matchings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matchings.each do |matching| %>
+      <tr>
+        <td><%= link_to 'Show', matching %></td>
+        <td><%= link_to 'Edit', edit_matching_path(matching) %></td>
+        <td><%= link_to 'Destroy', matching, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Matching', new_matching_path %>
