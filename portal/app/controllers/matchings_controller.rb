@@ -1,20 +1,15 @@
 class MatchingsController < ApplicationController
   def create
-    current_user.matchings.create(match_id: params[:match_id], status: 'pending')
-    respond_to do |format|
-      format.html { redirect_to users_path, notice: 'Match request sent.' }
-    end
-  end
-
-  def match
   	match = User.find(params[:match_id])
-    if match.matchings.pending.find_by(match_id: current_user.id)
-    	match.matchings.pending.find_by(match_id: current_user.id).update_attribute(:status, 'accepted')
-    	current.user.matchings.create(match_id: match.id, status: 'accepted')
+    if match.matchings.find_by(:match_id, :user_id, status: 'pending')
+    	match.matchings.find_by(:match_id, :user_id).update_attribute(:status, 'accepted')
+      respond_to do |format|
+          format.html { redirect_to users_path, notice: 'Match made.' }
+      end
     else
 	    current_user.matchings.create(match_id: params[:match_id], status: 'pending')
 	    respond_to do |format|
-	        format.html { redirect_to users_path, notice: 'Match preference noted.' }
+	        format.html { redirect_to users_path, notice: 'Match request sent.' }
 	    end
 	  end
   end

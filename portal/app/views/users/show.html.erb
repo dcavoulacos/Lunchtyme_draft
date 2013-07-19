@@ -51,13 +51,13 @@
 <%= link_to 'Back', users_path %>
 
 <% if @user != @current_user %>
-  <% if @user.matchings.find_by(match_id: @current_user.id, status: 'accepted') %>
+  <% if @user.matchings.find_by(match_id: @user.id, status: 'accepted') %>
       Already Matched
-  <% elsif @user.matchings.find_by(match_id: @current_user.id, status: 'pending') %>
+  <% elsif @user.matchings.find_by(match_id: @user.id, status: 'pending') %>
       Lunch Request Pending
-  <% elsif @user.matchings.find_by(match_id: @current_user.id, status: 'requested') %>
-      <%= link_to 'Request Lunch', matchings_path(match_id: @current_user.id), method: :post %>
+  <% elsif @user.matchings.find_by(match_id: @user.id, status: 'requested') %>
+      <%= link_to 'Request Lunch', matchings_path(match_id: @user.id), method: :post %>
   <% else %>
-      <%= link_to 'Request Lunch', matchings_path(match_id: @current_user.id), method: :post %>
+      <%= link_to 'Request Lunch', matchings_path(match_id: @user.id), method: :post %>
   <% end %>
 <% end %>
