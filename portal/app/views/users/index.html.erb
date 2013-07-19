@@ -28,8 +28,11 @@
         <td><%= user.gender %></td>
         <td><%= link_to 'Show', user %></td>
         <% if @current_user == user %>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
           <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% if @current_user != user %>
+          <td id = 'request'><%= link_to 'Request Lunch', matchings_path(match_id: @current_user.id), method: :post %></td>
         <% end %>
       </tr>
     <% end %>

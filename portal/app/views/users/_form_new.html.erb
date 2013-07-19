@@ -1,0 +1,25 @@
+<%= simple_form_for(@user) do |f| %>
+		
+
+    <%= f.input :first_name, input_html: { maxlength: 30 }%><br>
+    <%= f.input :last_name, input_html: { maxlength: 30 }%><br>
+ 
+    <%= f.input :class_year, collection: 2014..2017, label: 'Class Year' %><br>
+  
+    <%= f.input :res_college, collection: [ "BK","BR","CC","DC","ES","JE","MC","PC","SM","SY","TC","TD"], label: 'Residential College'%><br>
+
+    <%= f.input :email, input_html: { maxlength: 30 }, label: 'Convenient Email Address' %><br>
+
+    <%= f.input :phone, input_html: {maxlength: 10}, autofocus: true, label: 'Cell Phone Number' %><br>
+   
+    <%= f.input :gender, priority: [ " " ], collection: [ "Male", "Female", " "]%><br>
+ 
+    <%= f.hidden_field :facebook_id %>
+    <%= f.hidden_field :friends %>
+    <%= f.hidden_field :netid, value: session[:cas_user] %>
+
+
+    <%= f.submit 'Create Your Profile' %>
+
+<% end %>
+
