@@ -1,16 +1,14 @@
 Portal::Application.routes.draw do
   root 'users#index'
   resources :users
-  resources :schedules  
+  resources :schedules
+  resources :matchings
 
   get 'auth/:provider/callback', to: 'sessions#login'
   #match 'auth/failure', to: redirect('/'), via [:get, :post]
   get '/logout', to: 'sessions#logout', as: :logout
   get '/login', to: 'sessions#login', as: :login
   
-
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -3,13 +3,11 @@
 
 class User < ActiveRecord::Base
 	has_many :schedules
-
-
 	serialize :friends
-	has_many :pending_matches,
-         :through => :matchings,
-         :source => :match,
-         :conditions => "confirmed = 0"  # assuming 0 means 'pending'
+	has_many :matchings, :dependent => :destroy
+	has_many :matches, :through => :matchings, :conditions => "status = 'accepted'"
+	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
+	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
 
 	def self.from_omniauth(auth)
 
@@ -94,6 +92,5 @@ class User < ActiveRecord::Base
 			self.class_year = result[0][:class][0]
 		end
 	end
-
 
 end

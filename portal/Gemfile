@@ -65,6 +65,12 @@ gem 'net-http-digest_auth'
 #gem 'rubycas-client-rails', git: "git://github.com/rubycas/rubycas-client-rails.git"
 gem 'rubycas-client', '2.3.10.rc1'
 
+# makes better errors
+group :development do
+  gem "better_errors"
+  #advanced options
+  gem "binding_of_caller"
+end
 
 
 #gem 'rubycas-client'
