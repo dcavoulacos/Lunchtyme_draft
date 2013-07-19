@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 			@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.friends = @graph.get_connections("me", "friends")
 			user.save!
-		#elsif user.facebook_id == auth.uid.to_i
+		#elsif user.facebook_id == auth.uid
 		#	user.oauth_token = auth.credentials.token
 		#	user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 		#	@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
 	#	end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
+
+
+
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
