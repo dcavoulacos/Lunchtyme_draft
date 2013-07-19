@@ -21,10 +21,10 @@ class MatchingsController < ApplicationController
   end
   
   def destroy
-    @matching = Matching.find(params[:matching])
+    @matching = Matching.find(params[:id])
     @matching.destroy
     respond_to do |format|
-      format.html { redirect_to users_path }
+      format.html { redirect_to matchings_path }
       format.json { head :no_content }
     end
   end
