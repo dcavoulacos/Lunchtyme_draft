@@ -34,7 +34,6 @@ class UsersController < ApplicationController
     else
       @user = User.find(@id)
     end
-    render text: "You may only edit your own user details." unless @user == @current_user
   end
 
   # POST /users
@@ -45,7 +44,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to "/auth/facebook"}
+        format.html { redirect_to "/auth/facebook" }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -59,7 +58,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)  
-        format.html { redirect_to "/auth/facebook", notice: 'User was successfully updated.' }
+        format.html { redirect_to "/auth/facebook" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -76,14 +75,7 @@ class UsersController < ApplicationController
     #delete their schedule and matches eventually
   
     respond_to do |format|
-      format.html { 
-        if session[:id] == @user.id
-            session[:cas_user] = nil
-            redirect_to logout_path
-        else
-            redirect_to logout_path
-        end
-      }
+      format.html { redirect_to logout_path  }
       format.json { head :no_content }
     end
   end
@@ -100,6 +92,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
+      params.require(:user).permit(:name,:first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
     end
 end

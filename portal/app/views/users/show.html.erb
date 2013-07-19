@@ -10,14 +10,14 @@
   <%# end  %>
 <%# end  %>
 
-<br><%#= "Your Friends Using LunchtYme are #{@friendlist}" %>
+<br><%= "Your Friends Using LunchtYme are #{@friendlist}" %>
 
 
 <br><br>Personal Information <br>
 
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+  <%= @user.first_name %> <%= @user.last_name %>
 </p>
 
 <p>

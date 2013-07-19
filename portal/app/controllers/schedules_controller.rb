@@ -15,6 +15,11 @@ class SchedulesController < ApplicationController
 
 	def edit
 		@id = params[:id]		
+	  if @id.nil?
+      @schedule = Schedule.find(current_user.id)
+    else
+      @schedule = Schedule.find(@id)
+    end
 	end
 
 	def create		
@@ -33,7 +38,16 @@ class SchedulesController < ApplicationController
     end
 	end
 
-	def update		
+	def update	
+		respond_to do |format|
+      if @schedule.update(schedule_params)
+        format.html { redirect_to schedules_path}
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+      end
+    end	
 	end
 
 	def destroy		
