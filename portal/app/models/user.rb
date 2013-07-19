@@ -28,12 +28,6 @@ class User < ActiveRecord::Base
 		end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
-	
-
-
-
-
-
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
