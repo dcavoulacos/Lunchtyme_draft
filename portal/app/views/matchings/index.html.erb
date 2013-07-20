@@ -3,15 +3,18 @@
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>UserID</th>
+      <th>MatchID</th>
+      <th>Status</th>
     </tr>
   </thead>
 
   <tbody>
     <% @matchings.each do |matching| %>
       <tr>
+        <td><%= matching.user_id %></td>
+        <td><%= matching.match_id %></td>
+        <td><%= matching.status %></td>
         <td><%= link_to 'Show', matching %></td>
         <td><%= link_to 'Edit', edit_matching_path(matching) %></td>
         <td><%= link_to 'Destroy', matching, method: :delete, data: { confirm: 'Are you sure?' } %></td>
