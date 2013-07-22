@@ -1,5 +1,9 @@
 class MatchingsController < ApplicationController
 
+  def new
+    @matching = Matching.new
+  end
+
   def create
     current_user.matchings.create(match_id: params[:match_id], status: 'pending')
     respond_to do |format|

@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
 	has_many :schedules
 	serialize :friends
 	has_many :matchings, :dependent => :destroy
-	has_many :matches, :through => :matchings, :conditions => "status = 'accepted'"
-	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
-	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
+	has_many :matches, -> { where("status = 'accepted") }, :through => :matchings
+	has_many :requested_matches, -> { where("status = 'requested'").order(:created_at) }, :through => :matchings, :source => :match
+	has_many :pending_matches, -> { where("status = 'pending'").order(:created_at) }, :through => :matchings, :source => :match
 
 	def self.update_via_omniauth!(auth, user)
 		if user.facebook_id == nil		
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
-	KNOWN_AS = /^\s*Known As:\s*$/i
+	KNOWN_AS ||= /^\s*Known As:\s*$/i
 	EMAIL = /^\s*Email Address:\s*$/i
 	YEAR = /^\s*Class Year:\s*$/i
 	SCHOOL = /^\s*Division:\s*$/i
