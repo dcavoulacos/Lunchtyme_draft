@@ -16,7 +16,11 @@
   <br><br>About Me <br>
 
   <strong>Name:</strong>
-  <%= @user.first_name %> <%= @user.last_name %> (<%= @user.res_college %> '<%= @user.class_year-2000 %>)<br>
+   <td><%= @user.first_name %> <%= @user.last_name %> 
+            <%if @user.class_year && @user.res_college %>
+              (<%= @user.res_college %> '<%= @user.class_year-2000  %>)
+            <% end%>
+          </td>
 
   <br>Contact Info<br>
   <strong>Preferred Email:</strong>
@@ -26,17 +30,7 @@
   <%= @user.phone %><br><br>
 
 
-<%= link_to 'Edit Information', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
-<% if @user != @current_user %>
-  <% if @user.matchings.find_by(match_id: @user.id, status: 'accepted') %>
-      Already Matched
-  <% elsif @user.matchings.find_by(match_id: @user.id, status: 'pending') %>
-      Lunch Request Pending
-  <% elsif @user.matchings.find_by(match_id: @user.id, status: 'requested') %>
-      <%= link_to 'Request Lunch', matchings_path(match_id: @user.id), method: :post %>
-  <% else %>
-      <%= link_to 'Request Lunch', matchings_path(match_id: @user.id), method: :post %>
-  <% end %>
-<% end %>
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Your Profile', @current_user %> |
+<%= link_to 'Your Lunch List', users_path %> |
+<%= link_to 'Sign up for lunch Today!', new_schedule_path %>

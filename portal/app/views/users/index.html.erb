@@ -56,11 +56,10 @@
 
 <br>
 
-<%= link_to 'Your Profile', @current_user %> | 
-<%#= link_to 'New User', new_user_path %>
-<%= link_to 'Sign up for lunch Today!', schedules_path %>
-
-
-
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Your Profile', @current_user %> |
+<%= link_to 'Your Lunch List', users_path %> |
+<%= link_to 'Sign up for lunch Today!', new_schedule_path %>
+<%= link_to 'Destroy', @current_user, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 

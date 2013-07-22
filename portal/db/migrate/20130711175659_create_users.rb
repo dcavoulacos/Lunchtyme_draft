@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :phone
       t.string :gender
       t.integer :facebook_id
-
       t.timestamps
     end
   end

@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.netid = session[:cas_user]
+    @user.objectm = {}
 
     respond_to do |format|
       if @user.save
@@ -71,6 +72,10 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
+    Matching.all.where(user_id: current_user.id).each do |match|
+      match.destroy
+    end
+
     @user.destroy
     #delete their schedule and matches eventually
   
@@ -93,6 +98,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name,:first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :facebook_id, :friends)
+      params.require(:user).permit(:name,:first_name, :last_name, :netid, :class_year, :res_college, :email, :phone, :gender, :objectm,:facebook_id, :friends)
     end
 end

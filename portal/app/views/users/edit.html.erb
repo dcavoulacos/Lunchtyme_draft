@@ -2,5 +2,7 @@
 
 <%= render 'form_edit' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Your Profile', @current_user %> |
+<%= link_to 'Your Lunch List', users_path %> |
+<%= link_to 'Sign up for lunch Today!', new_schedule_path %>
