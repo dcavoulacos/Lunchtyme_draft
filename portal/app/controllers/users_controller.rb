@@ -28,12 +28,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @id = params[:id]
-    if @id.nil?
-      @user = User.find(@current_user.id)
-    else
-      @user = User.find(@id)
-    end
+    #@id = params[:id]
+    #if @id.nil?
+    #  @user = User.find(@current_user.id)
+    #else
+    #  @user = User.find(@id)
+    #end
   end
 
   # POST /users

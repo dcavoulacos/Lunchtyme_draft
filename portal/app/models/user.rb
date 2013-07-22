@@ -33,7 +33,10 @@ class User < ActiveRecord::Base
 	end
 
 
-
+	#validates :phone, :gender, presence: true
+	#validates :handle, uniqueness: { case_sensitive: false }
+	validates :phone, format: { with: /[0-9]+/,
+    message: "Only use numbers" }
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
