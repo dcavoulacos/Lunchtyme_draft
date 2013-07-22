@@ -1,11 +1,11 @@
-<h1>Listing users</h1>
+<h1>All Yalies in Your Network</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User </th>
+      <!-- <th>User </th> -->
      
-      <th>Email </th>
+      <!-- <th>Email </th> -->
       
       
       <th></th>
@@ -17,23 +17,38 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.first_name %> <%= user.last_name %> 
-        <%if user.class_year && user.res_college %>
-          (<%= user.res_college %> '<%= user.class_year-2000  %>)
-        <% end%>
-        </td>
-        
-        <td><%= user.email %></td>
         
        
-        <td><%= link_to 'Show', user %></td>
-        <% if @current_user == user %>
-          <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <%# if @current_user == user %>
+          <%#= link_to 'Show', user %>
+          <%#= link_to 'Edit Profile', edit_user_path(user) %>
+          <%#= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%# end %>
+        
+        <% if user != @current_user %>
+
+
+          <td><%= user.first_name %> <%= user.last_name %> 
+            <%if user.class_year && user.res_college %>
+              (<%= user.res_college %> '<%= user.class_year-2000  %>)
+            <% end%>
+          </td>
+        
+        <%#= user.email %>
+        
+
+            <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>
+                <td><%= "On Your Lunch List" %></td>
+            <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
+                <td><%= "Request Sent" %></td>
+            <%# elsif @current_user.matchings.find_by(status: 'requested') %>
+                <%#= link_to 'Accept', matchings_path(match_id: user.id), method: :post %>
+            <% else %>
+                <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
+            <% end %>
         <% end %>
-        <% if @current_user != user %>
-          <td id = 'request'><%= link_to 'Request Lunch', matchings_path(match_id: @current_user.id), method: :post %></td>
-        <% end %>
+      
       </tr>
     <% end %>
   </tbody>
@@ -41,5 +56,10 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
-<%= link_to 'Schedule', schedules_path %>
+<%= link_to 'Edit Profile', edit_user_path(@user) %> |
+<%= link_to 'Your Profile', @current_user %> |
+<%= link_to 'Your Lunch List', users_path %> |
+<%= link_to 'Sign up for lunch Today!', new_schedule_path %>
+<%= link_to 'Destroy', @current_user, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
