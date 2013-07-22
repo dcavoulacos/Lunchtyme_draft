@@ -15,10 +15,13 @@
   </thead>
 
   <tbody>
+
+  <!-- @graph = Koala::Facebook::API.new(@@token) -->
+      
+
+
     <% @users.each do |user| %>
       <tr>
-        
-       
         
         <%# if @current_user == user %>
           <%#= link_to 'Show', user %>
@@ -35,7 +38,9 @@
             <% end%>
           </td>
         
-        <%#= user.email %>
+
+          <%# mutualfriends = @graph.get_connections("me", "mutualfriends/#{user.facebook_id}") %>
+          <%#= mutualfriends.size %>
         
 
             <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>

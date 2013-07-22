@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 	has_many :schedules
 	serialize :friends
 	serialize :objectm
+	serialize :likes
+	
 	has_many :matchings, :dependent => :destroy
 	has_many :matches, :through => :matchings, :conditions => "status = 'accepted'"
 	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
@@ -17,14 +19,15 @@ class User < ActiveRecord::Base
 			user.name = auth.info.name
 			user.email = auth.info.email
 			#user.gender = auth.info.gender
+			@@token = auth.credentials.token
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.objectm = @graph.get_object("me")
 			user.friends = @graph.get_connections("me", "friends")
-			#user.likes = @graph.get_connections("me", "likes")
-			#user.mutualfriends = @graph.get_connections("me", "mutualfriends/#{friend_id}")
-			user.save!
+			user.likes = @graph.get_connections("me", "likes")
+			user.gender =  @graph.get_connections("me", "mutualfriends/1349418610").size.to_s
+         	user.save!
 		elsif user.facebook_id.to_s == auth.uid.to_s
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
