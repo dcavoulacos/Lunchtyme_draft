@@ -8,11 +8,8 @@
 <%# current_user.friends.each do |friend|  %>
   <%# if !User.where(name: friend.values[0]).empty? %>
    <%# @friendlist << friend.values[0] %>
-  <%# end  %>
-<%# end  %>
-
-<br><%= "Your Friends Using LunchtYme are #{@friendlist}" %>
-
+  <%# end %>
+<%# end %>
 
   <br><br>About Me <br>
 
@@ -31,7 +28,4 @@
   <%= @user.phone %><br><br>
 
 
-<%= link_to 'Edit Profile', edit_user_path(@user) %> |
-<%= link_to 'Your Profile', @current_user %> |
-<%= link_to 'Your Lunch List', users_path %> |
-<%= link_to 'Sign up for lunch Today!', new_schedule_path %>
+<%= link_to 'Edit Profile', edit_user_path(@user) %>

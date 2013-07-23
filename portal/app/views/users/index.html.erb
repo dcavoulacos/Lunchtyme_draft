@@ -5,7 +5,7 @@
     <tr>
       <!-- <th>User </th> -->
      
-      <!-- <th>Email </th> -->
+      <th> </th>
       
       
       <th></th>
@@ -18,7 +18,6 @@
 
   <!-- @graph = Koala::Facebook::API.new(@@token) -->
       
-
 
     <% @users.each do |user| %>
       <tr>
@@ -37,8 +36,9 @@
               (<%= user.res_college %> '<%= user.class_year-2000  %>)
             <% end%>
           </td>
-        
-
+   
+          <td><%= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
+          
           <%# mutualfriends = @graph.get_connections("me", "mutualfriends/#{user.facebook_id}") %>
           <%#= mutualfriends.size %>
         
@@ -60,11 +60,3 @@
 </table>
 
 <br>
-
-<%= link_to 'Edit Profile', edit_user_path(@user) %> |
-<%= link_to 'Your Profile', @current_user %> |
-<%= link_to 'Your Lunch List', users_path %> |
-<%= link_to 'Sign up for lunch Today!', new_schedule_path %>
-<%= link_to 'Destroy', @current_user, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-
