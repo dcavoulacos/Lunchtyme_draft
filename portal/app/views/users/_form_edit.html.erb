@@ -12,10 +12,10 @@
 
     <%= f.input :phone, input_html: {maxlength: 10}, autofocus: true, label: 'Cell Phone Number' %><br>
    
-    <%= f.input :gender, priority: [ " " ], collection: [ "Male", "Female", " "]%><br>
+    <%#= f.input :gender, priority: [ " " ], collection: [ "male", "female", " "]%><br>
  
     <%= f.hidden_field :facebook_id %>
-    <%= f.hidden_field :friends %>
+    <%#= f.hidden_field :friends %>
     <%= f.hidden_field :netid, value: session[:cas_user] %>
 
 

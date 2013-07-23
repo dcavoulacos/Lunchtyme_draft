@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 	has_many :schedules
 	serialize :friends
 	serialize :objectm
+	serialize :likes
+	serialize :mutualfriends
 	has_many :matchings, :dependent => :destroy
 	has_many :matches, -> { where("status = 'accepted") }, :through => :matchings
 	has_many :requested_matches, -> { where("status = 'requested'").order(:created_at) }, :through => :matchings, :source => :match
@@ -14,18 +16,32 @@ class User < ActiveRecord::Base
 		if user.facebook_id == nil		
 			user.provider = auth.provider
 			user.facebook_id = auth.uid.to_s
+			user.lastpullfromfacebook = Time.now
 			user.name = auth.info.name
 			user.email = auth.info.email
-			#user.gender = auth.info.gender
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.objectm = @graph.get_object("me")
+			user.gender = user.objectm["gender"]
 			user.friends = @graph.get_connections("me", "friends")
-			#user.likes = @graph.get_connections("me", "likes")
-			#user.mutualfriends = @graph.get_connections("me", "mutualfriends/#{friend_id}")
-			user.save!
+			user.likes = @graph.get_connections("me", "likes")
+				mutual_friends = []
+				users = []
+				User.all.each do |u|
+					if u != user
+						mutual_friends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
+						users << u.facebook_id
+					end
+				end
+				user.mutualfriends = Hash[users.zip(mutual_friends)]
+         	user.save!
+         	
 		elsif user.facebook_id.to_s == auth.uid.to_s
+			user.provider = auth.provider
+			user.lastpullfromfacebook = Time.now
+			puts "HELLLLLO222222222222222222"
+
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -36,6 +52,13 @@ class User < ActiveRecord::Base
 		end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
 	end
+
+
+	def facebook_friend?(user)
+		return self.friends.values.include?(user.facebook_id)
+	end
+
+		 
 
 
 	#validates :phone, :gender, presence: true
