@@ -36,7 +36,6 @@ class User < ActiveRecord::Base
 				end
 			end
 			user.mutualfriends = Hash[users.zip(mutual_friends)]
-			#.sort_by{|k,v| v}.reverse
          	user.save!
 		elsif user.facebook_id.to_s == auth.uid.to_s
 			user.oauth_token = auth.credentials.token
