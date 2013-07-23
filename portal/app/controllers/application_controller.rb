@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action CASClient::Frameworks::Rails::Filter,  :unless => :skip_login?
   before_action :create_new_user_if_not_exist , except: [:logout]
-
+  #before_action :update_existing_user
   before_action :current_user
   helper_method :current_user
 
@@ -19,10 +19,18 @@ class ApplicationController < ActionController::Base
   	@current_user ||= User.find_by(netid: session[:cas_user])
   end
 
-  def create_new_user_if_not_exist
+  def create_new_user_if_not_exist  
     unless current_user
       redirect_to new_user_path
     end
   end
+
+  #def update_existing_user
+  #  if (Time.now - current_user.lastpullfromfacebook) > 100
+  #      puts "#{@current_user.lastpullfromfacebook}"
+  #      redirect_to "/auth/facebook"
+  #  end 
+  #end
+
 
 end

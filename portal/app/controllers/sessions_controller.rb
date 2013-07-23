@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
 	end
 
 	def login
+		puts "HELLLLLO1111111111111111111"
 		User.update_via_omniauth!(env["omniauth.auth"], current_user)
 		redirect_to root_path	
 	end
