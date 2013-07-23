@@ -7,18 +7,18 @@ class MatchingsController < ApplicationController
     end
   end
 
-  def match
-  	match = User.find(params[:match_id])
-    if match.matchings.pending.find_by(match_id: current_user.id)
-    	match.matchings.pending.find_by(match_id: current_user.id).update_attribute(:status, 'accepted')
-    	current.user.matchings.create(match_id: match.id, status: 'accepted')
-    else
-	    current_user.matchings.create(match_id: params[:match_id], status: 'pending')
-	    respond_to do |format|
-	        format.html { redirect_to users_path, notice: 'Match preference noted.' }
-	    end
-	  end
-  end
+  # def match
+  # 	match = User.find(params[:match_id])
+  #   if match.matchings.pending.find_by(match_id: current_user.id)
+  #   	match.matchings.pending.find_by(match_id: current_user.id).update_attribute(:status, 'accepted')
+  #   	current.user.matchings.create(match_id: match.id, status: 'accepted')
+  #   else
+	 #    current_user.matchings.create(match_id: params[:match_id], status: 'pending')
+	 #    respond_to do |format|
+	 #        format.html { redirect_to users_path, notice: 'Match preference noted.' }
+	 #    end
+	 #  end
+  # end
   
   def destroy
     @matching = Matching.find(params[:id])
