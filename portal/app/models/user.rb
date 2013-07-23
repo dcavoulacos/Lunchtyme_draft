@@ -16,9 +16,9 @@ class User < ActiveRecord::Base
 		if user.facebook_id == nil		
 			user.provider = auth.provider
 			user.facebook_id = auth.uid.to_s
+			user.lastpullfromfacebook = Time.now
 			user.name = auth.info.name
 			user.email = auth.info.email
-			#@@token = auth.credentials.token
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -26,18 +26,22 @@ class User < ActiveRecord::Base
 			user.gender = user.objectm["gender"]
 			user.friends = @graph.get_connections("me", "friends")
 			user.likes = @graph.get_connections("me", "likes")
-			# user.likes = @graph.get_connections("me", "education")
-			mutual_friends = []
-			users = []
-			User.all.each do |u|
-				if u != user
-					mutual_friends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
-					users << u.facebook_id
+				mutual_friends = []
+				users = []
+				User.all.each do |u|
+					if u != user
+						mutual_friends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
+						users << u.facebook_id
+					end
 				end
-			end
-			user.mutualfriends = Hash[users.zip(mutual_friends)]
+				user.mutualfriends = Hash[users.zip(mutual_friends)]
          	user.save!
+         	
 		elsif user.facebook_id.to_s == auth.uid.to_s
+			user.provider = auth.provider
+			user.lastpullfromfacebook = Time.now
+			puts "HELLLLLO222222222222222222"
+
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
