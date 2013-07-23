@@ -1,4 +1,4 @@
-<h1>All Yalies in Your Network</h1>
+<h1>Your Lunch List</h1>
 
 <table>
   <thead>
@@ -19,26 +19,34 @@
   <!-- @graph = Koala::Facebook::API.new(@@token) -->
       
 
-    <% @users.each do |user| %>
-      <tr>
+
+    <%# @current_user.friends.each do |friend| %>
+      <%#=friend.values[1] %>
+    <%# end%>
         
+        <% people = Hash[@current_user.mutualfriends.sort_by{|k,v| v}.reverse] %>
+          <% people.keys.each do |id| %>
+
+         <% user = User.where(facebook_id: id ).first %>
+      <tr>
         <%# if @current_user == user %>
           <%#= link_to 'Show', user %>
           <%#= link_to 'Edit Profile', edit_user_path(user) %>
           <%#= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
         <%# end %>
         
-        <% if user != @current_user %>
+        <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
 
 
-          <td><%= user.first_name %> <%= user.last_name %> 
-            <%if user.class_year && user.res_college %>
-              (<%= user.res_college %> '<%= user.class_year-2000  %>)
-            <% end%>
-          </td>
-   
-          <td><%= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
-          
+            <td><%= user.first_name %> <%= user.last_name %> 
+              <%if user.class_year && user.res_college %>
+                (<%= user.res_college %> '<%= user.class_year-2000  %>)
+              <% end%>
+            </td>
+     
+            <td><%#= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
+            <td><%= "#{people[id]} Mutual Friends" %></td>
+            
           <%# mutualfriends = @graph.get_connections("me", "mutualfriends/#{user.facebook_id}") %>
           <%#= mutualfriends.size %>
         
@@ -52,6 +60,7 @@
             <% else %>
                 <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
             <% end %>
+
         <% end %>
       
       </tr>

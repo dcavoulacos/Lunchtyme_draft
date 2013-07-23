@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 			user.facebook_id = auth.uid.to_s
 			user.name = auth.info.name
 			user.email = auth.info.email
-			@@token = auth.credentials.token
+			#@@token = auth.credentials.token
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
@@ -27,16 +27,16 @@ class User < ActiveRecord::Base
 			user.friends = @graph.get_connections("me", "friends")
 			user.likes = @graph.get_connections("me", "likes")
 			# user.likes = @graph.get_connections("me", "education")
-			mutualfriends = []
+			mutual_friends = []
 			users = []
 			User.all.each do |u|
 				if u != user
-					mutualfriends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
+					mutual_friends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
 					users << u.facebook_id
 				end
 			end
-			user.mutualfriends = Hash[users.zip(mutualfriends)]
-			#user.gender =  @graph.get_connections("me", "mutualfriends/1349418610").length.to_s
+			user.mutualfriends = Hash[users.zip(mutual_friends)]
+			#.sort_by{|k,v| v}.reverse
          	user.save!
 		elsif user.facebook_id.to_s == auth.uid.to_s
 			user.oauth_token = auth.credentials.token
@@ -51,18 +51,11 @@ class User < ActiveRecord::Base
 	end
 
 
-	
-	# def mutual_friends
-	# 	mutualfriends = []
-	# 	users = []
-	# 	User.all.each do |user|
-	# 		mutualfriends << @graph.get_connections("me", "mutualfriends/#{user.facebook_id}").length.to_s
-	# 		users << user
-	# 	end
-	# 	return Hash[users.zip(mutualfriends)] 
-	# end
+	def facebook_friend?(user)
+		return self.friends.values.include?(user.facebook_id)
+	end
 
-		
+		 
 
 
 	#validates :phone, :gender, presence: true
