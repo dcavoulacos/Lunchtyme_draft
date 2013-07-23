@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
 	
 	skip_before_action :current_user, only: [:logout]
 
+	def new
+	end
+
 	def login
 		User.update_via_omniauth!(env["omniauth.auth"], current_user)
 		redirect_to root_path	
