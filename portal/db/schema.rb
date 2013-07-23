@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130716134818) do
+ActiveRecord::Schema.define(version: 20130723002516) do
 
   create_table "matchings", force: true do |t|
     t.integer  "user_id"
@@ -48,10 +48,13 @@ ActiveRecord::Schema.define(version: 20130716134818) do
     t.string   "provider"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.string   "friends"
+    t.text     "friends",          limit: 255
     t.string   "netid"
     t.string   "first_name"
     t.string   "last_name"
+    t.text     "objectm"
+    t.text     "likes"
+    t.text     "mutualfriends"
   end
 
 end

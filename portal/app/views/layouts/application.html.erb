@@ -23,4 +23,15 @@
 <%= yield %>
 
 </body>
+
+	<div class="sidebar">
+		<%= link_to 'Profile', @current_user %> |
+		<%= link_to 'Lunch List', users_path %> |
+		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
+		      <%= link_to 'Sign up for lunch Today!', new_schedule_path %>
+		    <%# else %>
+		      <%#= link_to 'Add More Friends to Your Lunch List!', users_path %>
+		    <%# end %>
+	</div>
+
 </html>

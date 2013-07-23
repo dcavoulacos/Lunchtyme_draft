@@ -4,6 +4,9 @@
 class User < ActiveRecord::Base
 	has_many :schedules
 	serialize :friends
+	serialize :objectm
+	serialize :likes
+	serialize :mutualfriends
 	has_many :matchings, :dependent => :destroy
 	has_many :matches, :through => :matchings, :conditions => "status = 'accepted'"
 	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
@@ -15,11 +18,25 @@ class User < ActiveRecord::Base
 			user.facebook_id = auth.uid.to_s
 			user.name = auth.info.name
 			user.email = auth.info.email
+			#@@token = auth.credentials.token
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@graph = Koala::Facebook::API.new(user.oauth_token)
+			user.objectm = @graph.get_object("me")
+			user.gender = user.objectm["gender"]
 			user.friends = @graph.get_connections("me", "friends")
-			user.save!
+			user.likes = @graph.get_connections("me", "likes")
+			# user.likes = @graph.get_connections("me", "education")
+			mutual_friends = []
+			users = []
+			User.all.each do |u|
+				if u != user
+					mutual_friends << @graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
+					users << u.facebook_id
+				end
+			end
+			user.mutualfriends = Hash[users.zip(mutual_friends)]
+         	user.save!
 		elsif user.facebook_id.to_s == auth.uid.to_s
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
@@ -33,7 +50,17 @@ class User < ActiveRecord::Base
 	end
 
 
+	def facebook_friend?(user)
+		return self.friends.values.include?(user.facebook_id)
+	end
 
+		 
+
+
+	#validates :phone, :gender, presence: true
+	#validates :handle, uniqueness: { case_sensitive: false }
+	validates :phone, format: { with: /[0-9]+/,
+    message: "Only use numbers" }
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
