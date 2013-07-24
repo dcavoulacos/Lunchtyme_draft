@@ -39,7 +39,8 @@ class SchedulesController < ApplicationController
     end
 	end
 
-	def update	
+	def update
+		@schedule = Schedule.find(params[:id])
 		respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to schedules_path}

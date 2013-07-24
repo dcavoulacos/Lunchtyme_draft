@@ -10,6 +10,7 @@
    <%# @friendlist << friend.values[0] %>
   <%# end %>
 <%# end %>
+
 <div>
   <%= image_tag @user.imageurl %></td>
     Basic Info 
@@ -31,3 +32,8 @@
   <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
 
 <%= link_to 'Edit Profile', edit_user_path(@user) %>
+<br>
+<br>
+<% @user.find_matches(@user).each do |pal| %>
+  <%= pal.first_name + " " + pal.last_name %><br>
+<% end %>
