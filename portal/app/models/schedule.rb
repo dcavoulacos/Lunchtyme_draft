@@ -5,6 +5,7 @@ class Schedule < ActiveRecord::Base
   	matches = Matching.where(status: "accepted")
   	matches.each do |match|
   		overlap_between_time_windows(match.user_id, match.match_id)
+  	end
   	match.user_id
   	match.match_id
   end
