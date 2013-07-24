@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	
+	skip_before_action :update_existing_user
 	skip_before_action :current_user, only: [:logout]
 
 	def new

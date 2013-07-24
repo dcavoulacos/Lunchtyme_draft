@@ -2,8 +2,9 @@
 <html>
 <head>
   <title>Portal</title>
-  <%#= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Raleway' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -14,14 +15,14 @@
 		<div id="user_nav">
 			<% if @current_user %>
 				Hello, <strong><%= @current_user.first_name %></strong>!
-				<%= link_to "Sign out of LunchtYme", logout_path, id: "sign_out" %>
+				<%= link_to "Sign out", logout_path, id: "sign_out" %>
 			<% else %>
-				<%#= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
+				<%#= link_to "Sign in with CAS & Facebook", new_user_path, id: "sign_in" %>
 			<% end %>
 		</div>
 		<div class="sidebar">
-		<%= link_to 'Profile', @current_user %> |
-		<%= link_to 'Lunch List', users_path %> |
+		<%= link_to 'Profile', @current_user %> 
+		<%= link_to 'Lunch List', users_path %> 
 		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
 					<% if @current_user && @current_user.schedules.where("day = ?", Time.now.strftime("%A")).present? %>
 					  <%= link_to "Sign up for lunch Today!", edit_schedule_path(@current_user.schedules.find_by_day(Time.now.strftime("%A"))) %>

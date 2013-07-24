@@ -4,9 +4,9 @@
     <%= f.input :first_name, input_html: { maxlength: 30 }%><br>
     <%= f.input :last_name, input_html: { maxlength: 30 }%><br>
  
-    <%= f.input :class_year, collection: 2014..2017, label: 'Class Year' %><br>
+    <%= f.hidden_field :class_year, collection: 2014..2017, label: 'Class Year' %>
   
-    <%= f.input :res_college, collection: [ "BK","BR","CC","DC","ES","JE","MC","PC","SM","SY","TC","TD"], label: 'Residential College'%><br>
+    <%= f.hidden_field :res_college, collection: [ "BK","BR","CC","DC","ES","JE","MC","PC","SM","SY","TC","TD"], label: 'Residential College'%>
 
     <%= f.input :email, input_html: { maxlength: 30 }, label: 'Convenient Email Address' %><br>
 
