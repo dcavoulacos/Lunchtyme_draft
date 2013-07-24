@@ -13,26 +13,20 @@ class User < ActiveRecord::Base
 	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
 
 	def self.update_via_omniauth!(auth, user)
-		if  user.facebook_id == nil
-		#	||  auth.uid.to_s)
-			puts "44444444444444444444444444444444444444444444444444444"
-			puts "44444444444444444444444444444444444444444444444444444"
-			puts "44444444444444444444444444444444444444444444444444444"
-			puts "44444444444444444444444444444444444444444444444444444"
-			puts "44444444444444444444444444444444444444444444444444444"
+		if  user.facebook_id == nil			
 			user.provider = auth.provider
-			user.facebook_id = auth.uid.to_s
 			user.lastpullfromfacebook = Time.now
-			user.name = auth.info.name
-			user.email = auth.info.email
+				user.facebook_id = auth.uid.to_s
+				user.name = auth.info.name
+				user.email = auth.info.email
 			user.oauth_token = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 			@@graph = Koala::Facebook::API.new(user.oauth_token)
 			user.objectm = @@graph.get_object("me")
 			user.gender = user.objectm["gender"]
-			user.friends = @@graph.get_connections("me", "friends")
-			user.likes = @@graph.get_connections("me", "likes")
 			user.imageurl = @@graph.get_picture(user.objectm["username"])
+			user.friends = @@graph.get_connections("me", "friends")
+			#user.likes = @@graph.get_connections("me", "likes")
 			
 				mutual_friends = []
 				users = []
@@ -45,16 +39,28 @@ class User < ActiveRecord::Base
 				user.mutualfriends = Hash[users.zip(mutual_friends)]
          	user.save!
          	
-		# elsif user.facebook_id.to_s == auth.uid.to_s
-		# 	puts "44444444444444444444444444444444444444444444444444444"
-		# 	user.email = auth.info.email
-		# 	user.provider = auth.provider
-		# 	user.lastpullfromfacebook = Time.now
-		# 	user.oauth_token = auth.credentials.token
-		# 	user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-		# 	@graph = Koala::Facebook::API.new(user.oauth_token)
-		# 	user.friends = @graph.get_connections("me", "friends")
-		# 	user.save!
+		elsif user.facebook_id.to_s == auth.uid.to_s
+			user.provider = auth.provider
+			user.lastpullfromfacebook = Time.now
+			user.oauth_token = auth.credentials.token
+			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+			@@graph = Koala::Facebook::API.new(user.oauth_token)
+			user.objectm = @@graph.get_object("me")
+			user.gender = user.objectm["gender"]
+			user.imageurl = @@graph.get_picture(user.objectm["username"])
+			user.friends = @@graph.get_connections("me", "friends")
+			#user.likes = @@graph.get_connections("me", "likes")
+			
+				mutual_friends = []
+				users = []
+				User.all.each do |u|
+					if u != user
+						mutual_friends << @@graph.get_connections("me", "mutualfriends/#{u.facebook_id}").length
+						users << u.facebook_id
+					end
+				end
+				user.mutualfriends = Hash[users.zip(mutual_friends)]
+         	user.save!
 		else
 			"You are not logged in with your own Facebook Account!"
 		end

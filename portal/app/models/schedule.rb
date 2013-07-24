@@ -16,8 +16,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def location_match?(user1,user2)
-  	return true if user1.schedule.location == user2.schedule.location
-  	return false
+  	user1.schedule.location == user2.schedule.location
   end
 
   def length_of_time_window(user)

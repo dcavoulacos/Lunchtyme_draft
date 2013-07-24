@@ -1,6 +1,7 @@
 class MatchingsController < ApplicationController
   before_action :set_user, only: [:create] 
-
+  skip_before_action :update_existing_user
+  
   def create
     Matching.create(user_id: current_user.id, match_id: @user.id, status: 'pending')
     respond_to do |format|
