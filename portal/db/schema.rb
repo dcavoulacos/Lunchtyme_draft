@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130723190024) do
+ActiveRecord::Schema.define(version: 20130724135301) do
 
   create_table "matchings", force: true do |t|
     t.integer  "user_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20130723190024) do
     t.text     "likes"
     t.text     "mutualfriends"
     t.datetime "lastpullfromfacebook"
+    t.string   "imageurl"
   end
 
 end

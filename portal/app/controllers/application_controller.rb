@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action CASClient::Frameworks::Rails::Filter,  :unless => :skip_login?
-  #before_action :update_existing_user
+  #before_action :update_existing_user, except: [:logout]
+  before_action :create_new_user_if_not_exist , except: [:logout]
+ 
   before_action :current_user
   helper_method :current_user
   before_action :create_new_user_if_not_exist , except: [:logout]
@@ -26,11 +28,9 @@ class ApplicationController < ActionController::Base
   end
 
   #def update_existing_user
-  #  if (Time.now - current_user.lastpullfromfacebook) > 100
-  #      puts "#{@current_user.lastpullfromfacebook}"
-  #      redirect_to "/auth/facebook"
-  #  end 
+   # if current_user
+    #  redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 100)
+    #end
   #end
-
 
 end

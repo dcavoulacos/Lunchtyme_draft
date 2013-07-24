@@ -6,34 +6,40 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
-  <tbody>
+  <tbody>         
+          <!-- user.profile_path = @@graph.get_picture(auth.uid) -->
+        
+        <% people = Hash[current_user.mutualfriends.sort_by{|k,v| v}.reverse] %>
+          <% people.keys.each do |id| %>
 
-    <% people = Hash[@current_user.mutualfriends.sort_by{|k,v| v}.reverse] %>
-      <% people.keys.each do |id| %>
+          <% user = User.where(facebook_id: id ).first %>
+        <tr>
+        
+        
+        <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
+              <%# profile_path = @@graph.get_picture(id) %>
+              <td><%= image_tag user.imageurl %></td>
+            <td><%= user.first_name %> <%= user.last_name %> 
+              <%if user.class_year && user.res_college %>
+                (<%= user.res_college %> '<%= user.class_year-2000  %>)
+              <% end%>
+            </td>
+     
+            <td><%#= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
+            <td><%= "#{people[id]} Mutual Friends" %></td>
+        
 
-      <% user = User.where(facebook_id: id ).first %>
-      <tr>
-    
-        <% if (user != @current_user)%> <!-- && @current_user.facebook_friend?(user))%>-->
-          <td><%= user.first_name %> <%= user.last_name %> 
-            <%if user.class_year && user.res_college %>
-              (<%= user.res_college %> '<%= user.class_year-2000  %>)
-            <% end%>
-          </td>
-   
-          <td><%#= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
-          <td><%= "#{people[id]} Mutual Friends" %></td>
-      
-          <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>
-            <td><%= "On Your Lunch List" %></td>
-          <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
-            <td><%= "Request Sent" %></td>
-          <% else %>
-            <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
-          <% end %>
+            <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>
+                <td><%= "On Your Lunch List" %></td>
+            <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
+                <td><%= "On Your Lunch List <p>" %></td>
+            <% else %>
+                <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
+            <% end %>
 
         <% end %>
       </tr>
