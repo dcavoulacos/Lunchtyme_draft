@@ -1,4 +1,4 @@
-<h1>Your Basic Info <span class="hello" style = "font-size:16px;"><%= link_to '[Edit]', edit_user_path(@user) %></span> </h1>
+<h1>Your Basic Info <span class="hello" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
 
 <table>
   <thead>
@@ -24,13 +24,6 @@
 
   <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
 <br><br>
-
-
-
-
-
-
-
 
 
 

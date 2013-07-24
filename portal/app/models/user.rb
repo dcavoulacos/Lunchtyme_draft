@@ -12,6 +12,13 @@ class User < ActiveRecord::Base
 	has_many :requested_matches, :through => :matchings, :source => :match, :conditions => "status = 'requested'", :order => :created_at
 	has_many :pending_matches, :through => :matchings, :source => :match, :conditions => "status = 'pending", :order => :created_at
 
+	validates :first_name, :last_name, :email, :phone, presence: true
+	validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/, message: "Your name only has letters in it, right?" }
+	validates :phone, format: { with: /[0-9]{10}/, message: "Please Insert a Valid Phone Number" }
+
+
+
+
 	def self.update_via_omniauth!(auth, user)
 		if  user.facebook_id == nil			
 			user.provider = auth.provider
@@ -74,12 +81,6 @@ class User < ActiveRecord::Base
 	end
 
 		 
-
-
-	#validates :phone, :gender, presence: true
-	#validates :handle, uniqueness: { case_sensitive: false }
-	validates :phone, format: { with: /[0-9]+/,
-    message: "Only use numbers" }
 
 	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i

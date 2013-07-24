@@ -1,6 +1,15 @@
 class Schedule < ActiveRecord::Base
   belongs_to :user
 
+  validate :start_must_be_30mins_before_end_time
+
+  def start_must_be_30mins_before_end_time
+   errors.add(:end_time, "Must be 30 minutes after start time") unless start_time < end_time
+  end
+
+
+
+
   def narrow_down_schedules
   	matches = Matching.where(status: "accepted")
   	matches.each do |match|
