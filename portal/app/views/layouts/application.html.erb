@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Portal</title>
-  <%#= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Raleway' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
@@ -24,7 +24,6 @@
 		<%= link_to 'Profile', @current_user %> 
 		<%= link_to 'Lunch List', users_path %> 
 		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
-		      <%= link_to 'Sign up for lunch Today!', new_schedule_path %>
 		    <%# else %>
 		      <%#= link_to 'Add More Friends to Your Lunch List!', users_path %>
 		    <%# end %>
