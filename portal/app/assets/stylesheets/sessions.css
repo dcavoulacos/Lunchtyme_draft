@@ -1,0 +1,35 @@
+
+
+#home { 
+  background: url(background2.png) 0 0 repeat fixed; 
+  background-size: cover; 
+  height: 700px; 
+  margin: 0 auto; 
+  width: 100%; 
+  position: relative; 
+}
+ 
+#home article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}
+ 
+#about { 
+  background: url(background_blue.png) 0 0 repeat fixed;
+  background-size: cover; 
+  height: 700px; 
+  margin: 0 auto; 
+  width: 100%; 
+  position: relative; 
+}
+ 
+#about article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}

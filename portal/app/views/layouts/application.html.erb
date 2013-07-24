@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-	<div id="container">
+	<div class="header">
+		<div class="lunchtyme">
+			<%= link_to(image_tag("lunchtyme2.png", :alt => "Home"), new_session_path) %>
+		</div>
 		<div id="user_nav">
 			<% if @current_user %>
 				Hello, <strong><%= @current_user.first_name %></strong>!
@@ -17,14 +19,7 @@
 				<%#= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
 			<% end %>
 		</div>
-	</div>	
-
-
-<%= yield %>
-
-</body>
-
-	<div class="sidebar">
+		<div class="sidebar">
 		<%= link_to 'Profile', @current_user %> |
 		<%= link_to 'Lunch List', users_path %> |
 		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
@@ -32,6 +27,11 @@
 		    <%# else %>
 		      <%#= link_to 'Add More Friends to Your Lunch List!', users_path %>
 		    <%# end %>
+		</div>
 	</div>
+
+<%= yield %>
+
+</body>
 
 </html>
