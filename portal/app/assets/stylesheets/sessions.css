@@ -1,5 +1,4 @@
 
-
 #home { 
   background: url(background2.png) 0 0 repeat fixed; 
   background-size: cover; 
@@ -43,8 +42,151 @@
   float: right;
 }
 
+
 #lunchbutton {
-  height: 50px;
-  width: 200px;
-  margin: auto;
+  width: 230px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
+  padding-right: 35px;
+  position: relative;
 }
+
+/* Footer */
+
+/* line 1, lib/_footer.scss */
+.footer {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color: #fff; }
+  @media (max-width: 320px) {
+    /* line 1, lib/_footer.scss */
+    .footer {
+      padding-top: 50px;
+      padding-bottom: 25px; } }
+
+/* line 14, lib/_footer.scss */
+.footer__icon {
+  width: 10%;
+  float: left;
+  text-align: center;
+  height: 40px; }
+  @media (max-width: 660px) {
+    /* line 14, lib/_footer.scss */
+    .footer__icon {
+      width: 33.33333%;
+      margin-bottom: 25px; } }
+
+.padding-y-8, .footer {
+  padding-top: 120px;
+  padding-bottom: 120px; }
+
+#footer_list {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 40px;
+  padding-left: 70px;
+  margin-top: 60px;
+}
+/* Icons */
+
+/* line 3, lib/_icons.scss */
+.icon-email {
+  background: url('icon-email.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-facebook {
+  background: url('icon-facebook.png') no-repeat 0 0;
+  height: 76px;
+  width: 38px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 38px;
+  width: 19px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-instagram {
+  background: url('icon-instagram.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-tumblr {
+  background: url('icon-tumblr.png') no-repeat 0 0;
+  height: 76px;
+  width: 46px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 38px;
+  width: 23px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-dribbble {
+  background: url('icon-dribbble.png') no-repeat 0 0;
+  height: 84px;
+  width: 82px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 42px;
+  width: 41px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-linkedin {
+  background: url('icon-linkedin.png') no-repeat 0 0;
+  height: 70px;
+  width: 70px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-pinterest {
+  background: url('icon-pinterest.png') no-repeat 0 0;
+  height: 82px;
+  width: 82px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 41px;
+  width: 41px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-flickr {
+  background: url('icon-flickr.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-twitter {
+  background: url('icon-twitter.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
