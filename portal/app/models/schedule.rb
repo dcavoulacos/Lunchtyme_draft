@@ -5,7 +5,15 @@ class Schedule < ActiveRecord::Base
   validate :start_must_be_30mins_before_end_time
 
   def start_must_be_30mins_before_end_time
-   errors.add(:end_time, "Must be 30 minutes after start time") unless start_time < end_time
+   errors.add(:end_time, "Must be 30 minutes after start time") unless convert_dimitri_time_to_minutes_after_midnight(start_time, end_time)
+  end
+
+  def convert_dimitri_time_to_minutes_after_midnight(start_time,end_time)
+    st = start_time[0..1].to_i*60 + start_time[3..4].to_i
+    st += 720 if st < 600
+    et = end_time[0..1].to_i*60 + end_time[3..4].to_i
+    et += 720 if et < 600
+    return (et-st-30 >= 0)
   end
 
   # def convert_stringtime_to_clocktime(stringtime)
@@ -21,6 +29,9 @@ class Schedule < ActiveRecord::Base
   # 	match.user_id
   # 	match.match_id
   # end
+
+  
+
 
   def convert_time(time_string)
   	hour = time_string.split(':').first.to_i
