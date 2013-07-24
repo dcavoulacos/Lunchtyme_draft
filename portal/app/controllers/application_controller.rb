@@ -17,20 +17,22 @@ class ApplicationController < ActionController::Base
 
 
   private
-  def current_user
-  	@current_user ||= User.find_by(netid: session[:cas_user])
-  end
 
-  def create_new_user_if_not_exist  
-    unless current_user
-      redirect_to new_user_path
+    def current_user
+      @current_user ||= User.find_by(netid: session[:cas_user])
     end
-  end
+
+    def create_new_user_if_not_exist  
+      unless current_user
+        redirect_to new_user_path
+      end
+    end
 
   #def update_existing_user
    # if current_user
     #  redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 100)
     #end
   #end
+
 
 end

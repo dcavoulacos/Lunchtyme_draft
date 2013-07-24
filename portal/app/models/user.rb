@@ -59,31 +59,7 @@ class User < ActiveRecord::Base
 			"You are not logged in with your own Facebook Account!"
 		end
 			#"https://graph.facebook.com/1463020126?fields=gender,first_name"
-		
 	end
-
-
-	def facebook_friend?(user)
-		return self.friends.values.include?(user.facebook_id)
-	end
-
-		 
-
-
-	#validates :phone, :gender, presence: true
-	#validates :handle, uniqueness: { case_sensitive: false }
-	validates :phone, format: { with: /[0-9]+/,
-    message: "Only use numbers" }
-
-	
-	NAME = KNOWN_AS = /^\s*Name:\s*$/i
-	KNOWN_AS ||= /^\s*Known As:\s*$/i
-	EMAIL = /^\s*Email Address:\s*$/i
-	YEAR = /^\s*Class Year:\s*$/i
-	SCHOOL = /^\s*Division:\s*$/i
-	COLLEGE = /^\s*Residential College:\s*$/i
-	LEAD_SPACE = /^\s+/
-	TRAIL_SPACE = /\s+$/
 
 	def make_cas_browser
 	  browser = Mechanize.new
@@ -121,13 +97,12 @@ class User < ActiveRecord::Base
 	  end
 	end
 
-
 	def search_ldap(login)
-	    ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
-	    filter = Net::LDAP::Filter.eq("uid", login)
-	    attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
-	             "mail", "collegename", "curriculumshortname", "college", "class"]
-	    result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
+	  ldap = Net::LDAP.new(host: "directory.yale.edu", port: 389)
+	  filter = Net::LDAP::Filter.eq("uid", login)
+	  attrs = ["givenname", "sn", "eduPersonNickname", "telephoneNumber", "uid",
+	           "mail", "collegename", "curriculumshortname", "college", "class"]
+	  result = ldap.search(base: "ou=People,o=yale.edu", filter: filter, attributes: attrs)
 		if !result.empty?
 			fname  = result[0][:givenname][0]
 			self.first_name = fname
@@ -141,4 +116,54 @@ class User < ActiveRecord::Base
 			self.class_year = result[0][:class][0]
 		end
 	end
+
+	def facebook_friend?(user)
+		return self.friends.values.include?(user.facebook_id)
+	end
+
+	def has_valid_schedule?
+		sched = self.schedules.where("day = ?", Time.now.strftime("%A")).first
+		return false unless sched.present?
+		sched.updated_at.today?
+	end		 
+
+	def find_matches(user)
+		return unless user.has_valid_schedule?
+		potential_matches = []
+		today = Time.now.strftime("%A")
+		sched1 = user.schedules.where("day = ?", today).first
+		user.matchings.find_by_status("accepted").each do |match|
+			
+			friend = User.find(match.match_id)
+			break unless friend.has_valid_schedule?
+			sched2 = friend.schedules.where("day = ?", today).first
+			
+			if sched1.location != sched2.location
+				break
+			elsif sched1.overlap_between_time_windows(sched1, sched2) < 30
+				break			
+			else
+				potential_matches << friend
+			end
+
+		end
+		return potential_matches.first.last_name
+	end	
+
+
+	#validates :phone, :gender, presence: true
+	#validates :handle, uniqueness: { case_sensitive: false }
+	validates :phone, format: { with: /[0-9]+/,
+    message: "Only use numbers" }
+
+	
+	NAME = KNOWN_AS = /^\s*Name:\s*$/i
+	KNOWN_AS ||= /^\s*Known As:\s*$/i
+	EMAIL = /^\s*Email Address:\s*$/i
+	YEAR = /^\s*Class Year:\s*$/i
+	SCHOOL = /^\s*Division:\s*$/i
+	COLLEGE = /^\s*Residential College:\s*$/i
+	LEAD_SPACE = /^\s+/
+	TRAIL_SPACE = /\s+$/
+
 end
