@@ -1,8 +1,9 @@
 Portal::Application.routes.draw do
-  root 'users#index'
+  root 'sessions#new'
   resources :users
   resources :schedules
   resources :matchings
+  resources :sessions
 
   get 'auth/:provider/callback', to: 'facebook#update', as: :facebook_update
   #match 'auth/failure', to: redirect('/'), via [:get, :post]
