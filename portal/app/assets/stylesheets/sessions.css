@@ -3,10 +3,11 @@
 #home { 
   background: url(background2.png) 0 0 repeat fixed; 
   background-size: cover; 
-  height: 700px; 
+  height: 550px; 
   margin: 0 auto; 
   width: 100%; 
-  position: relative; 
+  position: relative;
+  padding-top: 100px;
 }
  
 #home article { 
@@ -20,10 +21,12 @@
 #about { 
   background: url(background_blue.png) 0 0 repeat fixed;
   background-size: cover; 
-  height: 700px; 
+  height: 630px; 
   margin: 0 auto; 
   width: 100%; 
   position: relative; 
+  padding-top: 100px;
+  padding-bottom: 0px;
 }
  
 #about article { 
@@ -32,4 +35,16 @@
   text-align: center; 
   top: 150px; 
   width: 100%; 
+}
+
+#lunchmap {
+  -webkit-filter: drop-shadow(2px 2px 2px #000);
+  filter: drop-shadow(2px 2px 2px #000);
+  float: right;
+}
+
+#lunchbutton {
+  height: 50px;
+  width: 200px;
+  margin: auto;
 }
