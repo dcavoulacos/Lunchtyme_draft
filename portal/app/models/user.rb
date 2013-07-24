@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 			user.gender = user.objectm["gender"]
 			user.friends = @@graph.get_connections("me", "friends")
 			user.likes = @@graph.get_connections("me", "likes")
+			user.imageurl = @@graph.get_picture(user.objectm["username"])
 			
 				mutual_friends = []
 				users = []

@@ -16,3 +16,10 @@
 .sidebar {
 	float: right;
 }
+
+.img {
+	border: 8px solid #666;
+ 	border-radius: 40px;
+	-moz-border-radius: 40px;
+	-webkit-border-radius: 40px;
+}

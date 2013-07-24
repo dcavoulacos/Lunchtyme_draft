@@ -23,7 +23,7 @@
         
         <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
               <%# profile_path = @@graph.get_picture(id) %>
-              <td><%#= image_tag profile_path %></td>
+              <td><%= image_tag user.imageurl %></td>
             <td><%= user.first_name %> <%= user.last_name %> 
               <%if user.class_year && user.res_college %>
                 (<%= user.res_college %> '<%= user.class_year-2000  %>)
