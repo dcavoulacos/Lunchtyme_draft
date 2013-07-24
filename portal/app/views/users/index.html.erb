@@ -1,52 +1,80 @@
-<h1>Your Lunch List</h1>
+<h1>Your Basic Info <span class="hello" style = "font-size:16px;"><%= link_to '[Edit]', edit_user_path(@user) %></span> </h1>
 
 <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
+  <thead>
+    <tr>
+      <th></th>
+      <th><strong>Name:</strong></th>
+      <th><strong>Preferred Email:</strong></th>
+      <th><strong>Cell Phone:</strong></th>
+    </tr>
+  </thead>
 
   <tbody>
-          
-          <!-- user.profile_path = @@graph.get_picture(auth.uid) -->
-        
-        <% people = Hash[current_user.mutualfriends.sort_by{|k,v| v}.reverse] %>
-          <% people.keys.each do |id| %>
+    <tr>
+      <td><%= image_tag current_user.imageurl %></td>
+      <td><%= current_user.first_name %> <%= current_user.last_name %> 
+          <%if current_user.class_year && current_user.res_college %> (<%= current_user.res_college %> '<%= current_user.class_year-2000  %>) <% end%></td>
+      <td><%= current_user.email %></td>
+      <td><%= current_user.phone %></td>   
+    </tr>
+  </tbody>
+</table>
+<br>
 
-          <% user = User.where(facebook_id: id ).first %>
-        <tr>
-        
-        
-        <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
-              <%# profile_path = @@graph.get_picture(id) %>
-              <td><%= image_tag user.imageurl %></td>
-            <td><%= user.first_name %> <%= user.last_name %> 
-              <%if user.class_year && user.res_college %>
-                (<%= user.res_college %> '<%= user.class_year-2000  %>)
-              <% end%>
-            </td>
-     
-            <td><%#= "#{@current_user.mutualfriends[user.facebook_id]} Mutual Friends" %></td>
-            <td><%= "#{people[id]} Mutual Friends" %></td>
-        
+  <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
+<br><br>
 
-            <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>
-                <td><%= "On Your Lunch List" %></td>
-            <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
-                <td><%= "On Your Lunch List" %></td>
-            <% else %>
-                <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
-            <% end %>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Your Friends</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+    <% people = Hash[current_user.mutualfriends.sort_by{|k,v| v}.reverse] %>
+    <% people.keys.each do |id| %>
+      <tr>
+      <% user = User.where(facebook_id: id ).first %>
+      
+      <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
+        <td><%= image_tag user.imageurl %></td>
+        <td><%= user.first_name %> <%= user.last_name %> 
+          <%if user.class_year && user.res_college %> (<%= user.res_college %> '<%= user.class_year-2000  %>) <% end%></td>
+        <td><%= "#{people[id]} Mutual Friends" %></td>
+        
+        <% if @current_user.matchings.find_by(match_id: user.id, status: 'accepted') %>
+          <td><%= "On Your Lunch List" %></td>
+        <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
+          <td><%= "On Your Lunch List" %></td>
+        <% else %>
+          <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
         <% end %>
+
+      <% end %>
       
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
