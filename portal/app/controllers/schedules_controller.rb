@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+	skip_before_action :update_existing_user
 	before_action :current_user
 
 	def index
@@ -6,7 +7,7 @@ class SchedulesController < ApplicationController
 	end
 
 	def show
-			@schedule = Schedule.find(params[:id])
+		@schedule = Schedule.find(params[:id])
 	end
 
 	def new
@@ -38,7 +39,8 @@ class SchedulesController < ApplicationController
     end
 	end
 
-	def update	
+	def update
+		@schedule = Schedule.find(params[:id])
 		respond_to do |format|
       if @schedule.update(schedule_params)
         format.html { redirect_to schedules_path}

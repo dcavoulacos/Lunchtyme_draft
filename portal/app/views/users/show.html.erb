@@ -2,7 +2,7 @@
 
 <%# current_user.pull_facebook_friends %>
 
-<% @friendlist = [] %>
+<%# @friendlist = [] %>
 
 <%#=@current_user.imageurl%>
 <%# current_user.friends.each do |friend|  %>
@@ -11,7 +11,9 @@
   <%# end %>
 <%# end %>
 
-  <br><br>About Me <br>
+<div>
+  <%= image_tag @user.imageurl %></td>
+    Basic Info 
 
   <strong>Name:</strong>
    <td><%= @user.first_name %> <%= @user.last_name %> 
@@ -20,12 +22,18 @@
             <% end%>
           </td>
 
-  <br>Contact Info<br>
+  
   <strong>Preferred Email:</strong>
-  <%= @user.email %><br>
+  <%= @user.email %>
 
-  <strong>Mobile Phone:</strong>
+  <strong>Cell Phone:</strong>
   <%= @user.phone %><br><br>
 
+  <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
 
 <%= link_to 'Edit Profile', edit_user_path(@user) %>
+<br>
+<br>
+<% @user.find_matches(@user).each do |pal| %>
+  <%= pal.first_name + " " + pal.last_name %><br>
+<% end %>
