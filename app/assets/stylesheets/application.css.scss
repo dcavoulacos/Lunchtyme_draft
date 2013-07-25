@@ -13,16 +13,19 @@
  */
 
 
-.sidebar {
+#user_nav1 {
+	width: auto;
 	float: right;
 	margin-top: 15px;
+	margin-right: 50px;
 }
 
-#user_nav {
+#user_nav2 {
 	width: auto;
 	float: right;
 	margin-top: 15px;
 }
+
 
 .header {
 	width: auto;
@@ -30,7 +33,8 @@
 	padding: 30px 30px 30px 30px;
 	background-color: #002a5c;
 	color: #fff;
-	font-family: 'Droid Sans', sans-serif;
+	font-size: 20px;
+	font-family: 'Oxygen', sans-serif;
 }
 
 .lunchtyme {

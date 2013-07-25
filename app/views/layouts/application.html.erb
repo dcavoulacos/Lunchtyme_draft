@@ -4,29 +4,21 @@
   <title>Portal</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Raleway' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans|Raleway|Oxygen' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	<div class="header">
 		<div class="lunchtyme">
-			<%= link_to(image_tag("lunchtyme2.png", :alt => "Home"), root_path) %>
+			<%= link_to(image_tag("lunchtyme.png", :alt => "Home"), root_path) %>
 		</div>
-		<div id="user_nav">
+		<div id="user_nav1">
 			<% if @current_user %>
-				<%= link_to 'Lunch List', profile_path %>
-				Hello, <strong><%= @current_user.first_name %></strong>!
+				Hello, <b><%= link_to @current_user.first_name, profile_path %></b>!
 				<%= link_to "Sign out", logout_path, id: "sign_out" %>
 			<% else %>
 				<%= link_to "Sign in with CAS & Facebook", users_path, id: "sign_in" %>
 			<% end %>
-		</div>
-		<div class="sidebar">
-			<%#= link_to 'Profile', @current_user %> 
-		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
-		    <%# else %>
-		      <%#= link_to 'Add More Friends to Your Lunch List!', users_path %>
-		    <%# end %>
 		</div>
 	</div>
 
