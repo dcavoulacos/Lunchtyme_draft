@@ -1,7 +1,7 @@
-<div class="lunch-list" >
 
+<div class = "profile-page"> 
 
-<h1>Your Basic Info <span class="subclass" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
+<h1>Basic Info <span class="subclass" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
 
 <table>
   <thead>
@@ -28,7 +28,7 @@
 
 
 
- <h1>Your Lunch List <span class="subclass" style = "font-size:16px;">(<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>)</span> </h1>
+ <h1>Lunch List <span class="subclass" style = "font-size:16px;">(<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>)</span> </h1>
 
  <table>
   <tbody>
@@ -46,10 +46,10 @@
 
 
   
-</div>
 
-<div class="friends" style="float:right;">
-<h1>Your Friends</h1>
+
+
+<h1>Friends</h1>
 
 <table>
   <thead>
@@ -91,5 +91,6 @@
     
   </tbody>
 </table>
+
 
 </div>
