@@ -1,0 +1,284 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+.sidebar {
+  float: right;
+  margin-top: 15px; }
+
+#user_nav {
+  width: auto;
+  float: right;
+  margin-top: 15px; }
+
+.header {
+  width: auto;
+  height: 45px;
+  padding: 30px 30px 30px 30px;
+  background-color: #002a5c;
+  color: #fff;
+  font-family: 'Droid Sans', sans-serif; }
+
+.lunchtyme {
+  width: auto;
+  float: left; }
+
+.profile-page {
+  margin-left: 25%; }
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0px; }
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px; }
+
+a {
+  color: #000; }
+  a:visited {
+    color: #666; }
+  a:hover {
+    color: #fff;
+    background-color: transparent; }
+
+div.field, div.actions {
+  margin-bottom: 10px; }
+
+#notice {
+  color: green; }
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table; }
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0; }
+  #error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff; }
+  #error_explanation ul li {
+    font-size: 12px;
+    list-style: square; }
+
+#home { 
+  background: url(background2.png) 0 0 repeat fixed; 
+  background-size: cover; 
+  height: 550px; 
+  margin: 0 auto; 
+  width: 100%; 
+  position: relative;
+  padding-top: 100px;
+}
+ 
+#home article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}
+ 
+#about { 
+  background: url(background_blue.png) 0 0 repeat fixed;
+  background-size: cover; 
+  height: 630px; 
+  margin: 0 auto; 
+  width: 100%; 
+  position: relative; 
+  padding-top: 100px;
+  padding-bottom: 0px;
+}
+ 
+#about article { 
+  height: 458px; 
+  position: absolute; 
+  text-align: center; 
+  top: 150px; 
+  width: 100%; 
+}
+
+#lunchmap {
+  -webkit-filter: drop-shadow(2px 2px 2px #000);
+  filter: drop-shadow(2px 2px 2px #000);
+  float: right;
+}
+
+
+#lunchbutton {
+  width: 230px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 70px;
+  padding-right: 35px;
+  position: relative;
+}
+
+/* Footer */
+
+/* line 1, lib/_footer.scss */
+.footer {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  color: #fff; }
+  @media (max-width: 320px) {
+    /* line 1, lib/_footer.scss */
+    .footer {
+      padding-top: 50px;
+      padding-bottom: 25px; } }
+
+/* line 14, lib/_footer.scss */
+.footer__icon {
+  width: 10%;
+  float: left;
+  text-align: center;
+  height: 40px; }
+  @media (max-width: 660px) {
+    /* line 14, lib/_footer.scss */
+    .footer__icon {
+      width: 33.33333%;
+      margin-bottom: 25px; } }
+
+.padding-y-8, .footer {
+  padding-top: 120px;
+  padding-bottom: 120px; }
+
+#footer_list {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 40px;
+  padding-left: 70px;
+  margin-top: 60px;
+}
+/* Icons */
+
+/* line 3, lib/_icons.scss */
+.icon-email {
+  background: url('icon-email.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-facebook {
+  background: url('icon-facebook.png') no-repeat 0 0;
+  height: 76px;
+  width: 38px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 38px;
+  width: 19px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-instagram {
+  background: url('icon-instagram.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-tumblr {
+  background: url('icon-tumblr.png') no-repeat 0 0;
+  height: 76px;
+  width: 46px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 38px;
+  width: 23px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-dribbble {
+  background: url('icon-dribbble.png') no-repeat 0 0;
+  height: 84px;
+  width: 82px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 42px;
+  width: 41px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-linkedin {
+  background: url('icon-linkedin.png') no-repeat 0 0;
+  height: 70px;
+  width: 70px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-pinterest {
+  background: url('icon-pinterest.png') no-repeat 0 0;
+  height: 82px;
+  width: 82px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 41px;
+  width: 41px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-flickr {
+  background: url('icon-flickr.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
+
+/* line 3, lib/_icons.scss */
+.icon-twitter {
+  background: url('icon-twitter.png') no-repeat 0 0;
+  height: 80px;
+  width: 80px;
+  text-indent: -9999em;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-size: 100%; }
