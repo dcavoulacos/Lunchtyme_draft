@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action CASClient::Frameworks::Rails::Filter,  :unless => :skip_login?
+  before_action CASClient::Frameworks::Rails::Filter
   before_action :update_existing_user, except: [:logout]
   before_action :create_new_user_if_not_exist , except: [:logout]
  
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def update_existing_user
     if current_user
-      redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 600)
+      redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 86400)
     end
   end
 end

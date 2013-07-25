@@ -1,34 +1,56 @@
-<h1>Your Basic Info <span class="hello" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
+
+<div class = "profile-page"> 
+
+<h1>Basic Info <span class="subclass" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
 
 <table>
   <thead>
     <tr>
       <th></th>
-      <th><strong>Name:</strong></th>
-      <th><strong>Preferred Email:</strong></th>
-      <th><strong>Cell Phone:</strong></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td><%= image_tag current_user.imageurl %></td>
-      <td><%= current_user.first_name %> <%= current_user.last_name %> 
+      <td><strong>Name:</strong><br><%= current_user.first_name %> <%= current_user.last_name %> 
           <%if current_user.class_year && current_user.res_college %> (<%= current_user.res_college %> '<%= current_user.class_year-2000  %>) <% end%></td>
-      <td><%= current_user.email %></td>
-      <td><%= current_user.phone %></td>   
+      <td><strong>Preferred Email:</strong><br><%= current_user.email %></td>
+      <td><strong>Cell Phone:</strong><br><%= current_user.phone %></td>   
     </tr>
   </tbody>
 </table>
 <br>
 
-  <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
-<br><br>
+
+
+
+ <h1>Lunch List <span class="subclass" style = "font-size:16px;">[<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>]</span> </h1>
+
+ <table>
+  <tbody>
+    <% i = 1 %>
+    <% matches = @current_user.matchings.where(user_id: @current_user.id) %>
+    <% iterations = (matches.size/8) + 1  %>
+    <% while i <= iterations %>
+      <tr>
+      <% matches.each do |match| %> 
+          <% user = User.find(match.match_id) %>
+          <td><%= image_tag user.imageurl %><br><%= user.first_name %></td>
+      <% end %>
+      </tr>
+      <% i += 1 %>
+    <% end %>
+  </tbody>
+</table>
 
 
 
 
-<h1>Your Friends</h1>
+<h1>Friends</h1>
 
 <table>
   <thead>
@@ -47,7 +69,7 @@
       <tr>
       <% user = User.where(facebook_id: id ).first %>
       
-      <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
+      <% if (user != @current_user) %>  <!-- && @current_user.facebook_friend?(user)) %> -->
         <td><%= image_tag user.imageurl %></td>
         <td><%= user.first_name %> <%= user.last_name %> 
           <%if user.class_year && user.res_college %> (<%= user.res_college %> '<%= user.class_year-2000  %>) 
@@ -70,3 +92,6 @@
     
   </tbody>
 </table>
+
+
+</div>

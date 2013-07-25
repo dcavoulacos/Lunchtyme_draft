@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+	
 	skip_before_action :update_existing_user
 	before_action :current_user
 

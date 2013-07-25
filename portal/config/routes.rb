@@ -9,6 +9,9 @@ Portal::Application.routes.draw do
   #match 'auth/failure', to: redirect('/'), via [:get, :post]
   get '/logout', to: 'sessions#logout', as: :logout
   get '/login', to: 'sessions#login', as: :login
+  get '/profile', to: 'users#index', as: :profile
+  #get '/profile/edit', to: 'users/:id/edit', as: :profile_edit
+
   
 
   # The priority is based upon order of creation: first created -> highest priority.
