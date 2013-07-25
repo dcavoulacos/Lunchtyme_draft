@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 	validates :phone, format: { with: /[0-9]{10}/, message: "Please Insert a Valid Phone Number" }
 
 
+	#after_create :send_welcome_email
+
+	
+
 
 
 	def self.update_via_omniauth!(auth, user)
@@ -193,5 +197,12 @@ class User < ActiveRecord::Base
 	COLLEGE = /^\s*Residential College:\s*$/i
 	LEAD_SPACE = /^\s+/
 	TRAIL_SPACE = /\s+$/
+
+
+	private
+
+	def send_welcome_email
+ 		UserMailer.welcome_email(self).deliver
+	end
 
 end

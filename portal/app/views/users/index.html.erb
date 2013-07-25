@@ -23,7 +23,6 @@
     </tr>
   </tbody>
 </table>
-<br>
 
 
 
@@ -33,7 +32,7 @@
  <table>
   <tbody>
     <% i = 1 %>
-    <% matches = @current_user.matchings.where(user_id: @current_user.id) %>
+    <% matches = @current_user.matchings.where(user_id: @current_user.id).sort_by{|i| i.created_at}.reverse %>
     <% iterations = (matches.size/8) + 1  %>
     <% while i <= iterations %>
       <tr>
