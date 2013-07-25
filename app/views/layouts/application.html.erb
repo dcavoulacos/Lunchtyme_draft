@@ -17,7 +17,7 @@
 				Hello, <b><%= link_to @current_user.first_name, profile_path %></b>!
 				<%= link_to "Sign out", logout_path, id: "sign_out" %>
 			<% else %>
-				<%= link_to "Sign in with CAS & Facebook", users_path, id: "sign_in" %>
+				<%= link_to "Sign in with CAS & Facebook", profile_path, id: "sign_in" %>
 			<% end %>
 		</div>
 	</div>
