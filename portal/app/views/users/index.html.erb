@@ -72,7 +72,7 @@
       <tr>
       <% user = User.where(facebook_id: id ).first %>
       
-      <% if (user != @current_user)%>  <!-- && @current_user.facebook_friend?(user)) %> -->
+      <% if (user != @current_user) %>  <!-- && @current_user.facebook_friend?(user)) %> -->
         <td><%= image_tag user.imageurl %></td>
         <td><%= user.first_name %> <%= user.last_name %> 
           <%if user.class_year && user.res_college %> (<%= user.res_college %> '<%= user.class_year-2000  %>) 
