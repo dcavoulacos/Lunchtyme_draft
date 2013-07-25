@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def update_existing_user
     if current_user
-      redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 600)
+      redirect_to "/auth/facebook"  if ((Time.now - current_user.lastpullfromfacebook) > 86400)
     end
   end
 end

@@ -1,7 +1,7 @@
 class Schedule < ActiveRecord::Base
   belongs_to :user
 
-
+  validate :start_time, :end_time, :location, presence:true
   validate :start_must_be_30mins_before_end_time
 
   def start_must_be_30mins_before_end_time

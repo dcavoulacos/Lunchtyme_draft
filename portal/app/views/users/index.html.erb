@@ -1,33 +1,54 @@
-<h1>Your Basic Info <span class="hello" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
+<div class="lunch-list" >
+
+
+<h1>Your Basic Info <span class="subclass" style = "font-size:16px;">[<%= link_to 'Edit', edit_user_path(current_user) %>]</span> </h1>
 
 <table>
   <thead>
     <tr>
       <th></th>
-      <th><strong>Name:</strong></th>
-      <th><strong>Preferred Email:</strong></th>
-      <th><strong>Cell Phone:</strong></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td><%= image_tag current_user.imageurl %></td>
-      <td><%= current_user.first_name %> <%= current_user.last_name %> 
+      <td><strong>Name:</strong><br><%= current_user.first_name %> <%= current_user.last_name %> 
           <%if current_user.class_year && current_user.res_college %> (<%= current_user.res_college %> '<%= current_user.class_year-2000  %>) <% end%></td>
-      <td><%= current_user.email %></td>
-      <td><%= current_user.phone %></td>   
+      <td><strong>Preferred Email:</strong><br><%= current_user.email %></td>
+      <td><strong>Cell Phone:</strong><br><%= current_user.phone %></td>   
     </tr>
   </tbody>
 </table>
 <br>
 
-  <%= "You have #{(Matching.where(user_id: current_user.id)).size} Friends on your Lunch List" %>
-<br><br>
 
 
 
+ <h1>Your Lunch List <span class="subclass" style = "font-size:16px;">(<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>)</span> </h1>
 
+ <table>
+  <tbody>
+    <tr>
+    <% @users.each do |user| %> 
+      <% if @current_user.matchings.find_by(match_id: user.id) %>
+        <td><%= image_tag user.imageurl %><br><%= user.first_name %></td>
+
+      <% end %>
+    <% end %>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  
+</div>
+
+<div class="friends" style="float:right;">
 <h1>Your Friends</h1>
 
 <table>
@@ -70,3 +91,5 @@
     
   </tbody>
 </table>
+
+</div>
