@@ -1,6 +1,6 @@
 
 #home { 
-  background: url(background2.png) 0 0 repeat fixed; 
+  background: url(background2.jpg) 0 0 repeat fixed; 
   background-size: cover; 
   height: 550px; 
   margin: 0 auto; 
@@ -18,7 +18,7 @@
 }
  
 #about { 
-  background: url(background_blue.png) 0 0 repeat fixed;
+  background: url(background_blue.jpg) 0 0 repeat fixed;
   background-size: cover; 
   height: 630px; 
   margin: 0 auto; 

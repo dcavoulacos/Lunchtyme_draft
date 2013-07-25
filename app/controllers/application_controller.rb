@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
  
   before_action :current_user
   helper_method :current_user
-  before_action :create_new_user_if_not_exist , except: [:logout]
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
