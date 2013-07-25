@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
+	skip_before_action CASClient::Frameworks::Rails::Filter
 	skip_before_action :update_existing_user
+  	skip_before_action :create_new_user_if_not_exist
 	skip_before_action :current_user, only: [:logout]
 
 	def new

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action CASClient::Frameworks::Rails::Filter,  :unless => :skip_login?
+  before_action CASClient::Frameworks::Rails::Filter
   before_action :update_existing_user, except: [:logout]
   before_action :create_new_user_if_not_exist , except: [:logout]
  

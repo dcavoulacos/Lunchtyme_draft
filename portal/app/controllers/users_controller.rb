@@ -5,6 +5,7 @@
 
 
 class UsersController < ApplicationController
+  
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :create_new_user_if_not_exist, only: [:new, :create]
 
