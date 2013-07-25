@@ -28,7 +28,7 @@
 
 
 
- <h1>Lunch List <span class="subclass" style = "font-size:16px;">(<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>)</span> </h1>
+ <h1>Lunch List <span class="subclass" style = "font-size:16px;">[<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>]</span> </h1>
 
  <table>
   <tbody>
@@ -47,9 +47,6 @@
   </tbody>
 </table>
 
-
-
-  
 
 
 

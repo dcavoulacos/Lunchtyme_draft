@@ -10,11 +10,11 @@
 <body>
 	<div class="header">
 		<div class="lunchtyme">
-			<%= link_to(image_tag("lunchtyme2.png", :alt => "Home"), new_session_path) %>
+			<%= link_to(image_tag("lunchtyme2.png", :alt => "Home"), root_path) %>
 		</div>
 		<div id="user_nav">
 			<% if @current_user %>
-				<%= link_to 'Lunch List', users_path %>
+				<%= link_to 'Lunch List', profile_path %>
 				Hello, <strong><%= @current_user.first_name %></strong>!
 				<%= link_to "Sign out", logout_path, id: "sign_out" %>
 			<% else %>
