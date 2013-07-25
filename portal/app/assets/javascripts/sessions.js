@@ -13,3 +13,10 @@ $(document).ready(function(){
         }); 
     });    
 }); 
+
+$(document).ready(function() {
+    $('.lunchbutton').click(function(){
+        $('html, body').animate({scrollTop:$(document).height()}, 'slow');
+        return false;
+    });
+});
