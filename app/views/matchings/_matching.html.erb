@@ -1,0 +1,16 @@
+ <table class="lunch-list">
+  <tbody>
+    <% i = 1 %>
+    <% matches = @current_user.matchings.where(user_id: @current_user.id).sort_by{|i| i.created_at}.reverse %>
+    <% iterations = (matches.size/8) + 1  %>
+    <% while i <= iterations %>
+      <tr>
+      <% matches.each do |match| %> 
+          <% user = User.find(match.match_id) %>
+          <td><%= image_tag user.imageurl %><br><%= user.first_name %></td>
+      <% end %>
+      </tr>
+      <% i += 1 %>
+    <% end %>
+  </tbody>
+</table>

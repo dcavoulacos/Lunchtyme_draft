@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	skip_before_action RubyCAS::Filter
+	skip_before_action RubyCAS::Filter, only: [:new]
 	skip_before_action :update_existing_user
   	skip_before_action :create_new_user_if_not_exist
 	skip_before_action :current_user, only: [:logout]
