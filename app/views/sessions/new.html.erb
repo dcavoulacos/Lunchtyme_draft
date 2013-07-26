@@ -1,3 +1,4 @@
+<!-- <div class="centereverything">	 -->
 	<div id="home" data-type="background" data-speed="50">
 	    <div id='lunchbutton'><%= link_to (image_tag("lunchbutton_small.png")), "#bottom", method: :get, :class => 'lunchbutton' %></div>
 
@@ -36,9 +37,15 @@
 	     
 	<div id="about" data-type="background" data-speed="50">
 	    <article>Pick the time and place. We'll match you.</article>
+	    <div id="form_partial_background">
+	    	<div id="form_partial">
+	    		<%= render :partial => 'schedules/form' %>
+	    	</div>
+		</div>
 
-	    <div id='lunchmap'><%= image_tag "lunchmap.png", {width: "450", height: "600", usemap: "#lunchmap"} %></div>
+	    <div id='lunchmap'><%= image_tag "lunchmap.png", {width: "450", height: "600", usemap: "#lunchmap", :class => 'lunchmap'} %></div>
 
-		<map id="lunchmap" name="lunchmap"><area shape="poly" alt="" title="" coords="1269,399,2048,134,2221,1190,1604,1340,1602,1335" href="" target="" /><area shape="poly" alt="" title="" coords="1588,1352,2221,1198,2272,1532,2273,1777,2367,1777,2536,2358,2533,2632,1571,2632,1575,2358,1899,2355,1585,1354" href="" target="" /><area shape="poly" alt="" title="" coords="1309,2641,1929,2642,1913,3583,1304,3586,1304,3586" href="" target="" /><area shape="poly" alt="" title="" coords="762,3024,1143,2986,1302,2986,1301,3596,1573,3594,1571,3917,972,3917,966,3370,762,3379,762,3023" href="" target="" /><area shape="poly" alt="" title="" coords="965,1938,1306,2339,1299,2942,1199,2915,737,2688,712,2695,662,2673,570,2551,574,2506,796,2071,796,2071" href="" target="" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
+		<map id="imgmap20137267146" name="lunchmap"><area shape="poly" alt="Region1" title="Region1" coords="190,59,307,21,332,177,241,200,196,73" href="#bottom" target="bottom#" /><area shape="poly" alt="Region2" title="Region2" coords="241,203,334,181,341,231,342,268,356,268,381,353,380,394,236,394,237,354,288,353" href="#bottom" target="#bottom" /><area shape="poly" alt="Region3" title="Region3" coords="200,396,289,397,287,538,198,538,198,448,198,448" href="#bottom" target="#bottom" /><area shape="poly" alt="Region4" title="Region4" coords="115,454,171,450,196,450,196,540,238,539,237,589,147,589,146,505,115,507,115,507" href="#bottom" target="#bottom" /><area shape="poly" alt="Region5" title="Region5" coords="194,352,195,441,152,422,111,403,102,402,86,381,121,310,145,291" href="#bottom" target="#bottom" /><!-- Created by Online Image Map Editor (http://www.maschek.hu/imagemap/index) --></map>
 
 	</div>
+<!-- </div> -->
