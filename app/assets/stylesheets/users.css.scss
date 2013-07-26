@@ -2,4 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.home2 {
+  background: url(user_background.jpg) 0 0 repeat fixed; 
+  background-size: cover; 
+  height: 550px; 
+  margin: 0 auto; 
+  width: 100%; 
+  position: relative;
+  padding-top: 100px;
+}
 
+.profile-page {
+	margin-auto: 25%;
+	width: 600px;
+	height: 80%;
+	background-color: #ffffff;
+	border-radius: 15px;
+}
