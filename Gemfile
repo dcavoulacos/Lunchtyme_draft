@@ -76,3 +76,5 @@ end
 
 #gem 'rubycas-client'
 gem 'mechanize' 
+
+gem 'whenever', require: false

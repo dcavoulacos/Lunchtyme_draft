@@ -23,17 +23,16 @@
     </tr>
   </tbody>
 </table>
-<br>
 
 
 
 
  <h1>Lunch List <span class="subclass" style = "font-size:16px;">[<%="#{(Matching.where(user_id: current_user.id)).size} Friends" %>]</span> </h1>
 
- <table>
+ <table class="lunch-list">
   <tbody>
     <% i = 1 %>
-    <% matches = @current_user.matchings.where(user_id: @current_user.id) %>
+    <% matches = @current_user.matchings.where(user_id: @current_user.id).sort_by{|i| i.created_at}.reverse %>
     <% iterations = (matches.size/8) + 1  %>
     <% while i <= iterations %>
       <tr>
@@ -82,7 +81,7 @@
         <% elsif @current_user.matchings.find_by(match_id: user.id, status: 'pending') %>
           <td><%= "On Your Lunch List" %></td>
         <% else %>
-          <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post %></td>
+          <td><%= link_to 'Add to Lunch List', matchings_path(match_id: user.id), method: :post, remote: true %></td>
         <% end %>
 
       <% end %>
@@ -92,6 +91,5 @@
     
   </tbody>
 </table>
-
 
 </div>

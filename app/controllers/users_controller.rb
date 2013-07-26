@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :create_new_user_if_not_exist, only: [:new, :create]
 
+ 
   # GET /users
   # GET /users.json
   def index
@@ -46,6 +47,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        #UserMailer.welcome_email(@user).deliver
         format.html { redirect_to "/auth/facebook" }
         format.json { render action: 'show', status: :created, location: @user }
       else
