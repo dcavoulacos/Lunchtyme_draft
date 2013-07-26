@@ -1,6 +1,9 @@
-<h1>Schedules for <%= @current_user.first_name%> <%= @current_user.last_name%> </h1>
+<div id="home3">
+	<h1>Schedules for <%= @current_user.first_name%> <%= @current_user.last_name%> </h1>
+	<% @schedules.each do |schedule| %>
+		<%= @current_user.first_name %> is free at <%= schedule.location %> from
+		<%= schedule.start_time %> to <%= schedule.end_time %> on <%= schedule.day %>.<br>
+	<% end %>
 
-<% @schedules.each do |schedule| %>
-	<%= @current_user.first_name %> is free at <%= schedule.location %> from
-	<%= schedule.start_time %> to <%= schedule.end_time %> on <%= schedule.day %>.<br>
-<% end %>
+	<%= LunchPairer.greedy_pairer %>
+</div>
