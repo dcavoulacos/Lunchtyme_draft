@@ -31,17 +31,19 @@
 #about article { 
   height: 458px; 
   position: absolute; 
-  text-align: center; 
+  text-align: left; 
   top: 150px; 
   width: 100%; 
-  font-size: 18px;
+  font-size: 22px;
   color: #fff;
+  font-family: 'Oxygen', sans-serif;
 }
 
 #lunchmap {
   -webkit-filter: drop-shadow(2px 2px 2px #000);
   filter: drop-shadow(2px 2px 2px #000);
   float: right;
+  margin-right: 100px;
 }
 
 
