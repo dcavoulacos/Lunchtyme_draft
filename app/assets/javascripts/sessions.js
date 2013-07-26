@@ -402,3 +402,6 @@ $(function() {
         }).click(function(e) { e.preventDefault(); });
 });
 
+$(".lunchmap").click(function() {
+  $('#schedule_location').val("Central Campus");
+});
