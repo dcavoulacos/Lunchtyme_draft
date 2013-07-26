@@ -9,9 +9,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def match_email(user)
-
-    # Should we be looking for current_user here?
-
     @user = user
     @url = 'http://localhost:3000/entries/new?message_type=match'
     mail(to: @user.email, subject: 'You have been Matched!')

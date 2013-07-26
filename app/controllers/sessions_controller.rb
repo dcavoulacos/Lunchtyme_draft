@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	skip_before_action CASClient::Frameworks::Rails::Filter
+	skip_before_action RubyCAS::Filter
 	skip_before_action :update_existing_user
   	skip_before_action :create_new_user_if_not_exist
 	skip_before_action :current_user, only: [:logout]
@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
 	def logout
 		session = nil
 		@current_user = nil
-		CASClient::Frameworks::Rails::Filter.logout(self, root_path)
+		logout_url = root_path
+		RubyCAS::Filter.logout(self, root_path)
 	end
 end

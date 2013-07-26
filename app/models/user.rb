@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 			user.gender = user.objectm["gender"]
 			user.imageurl = @@graph.get_picture(user.objectm["username"])
 			user.friends = @@graph.get_connections("me", "friends")
-			#user.likes = @@graph.get_connections("me", "likes")
+			user.likes = @@graph.get_connections("me", "likes")
 			
 				mutual_friends = []
 				users = []
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 			user.gender = user.objectm["gender"]
 			user.imageurl = @@graph.get_picture(user.objectm["username"])
 			user.friends = @@graph.get_connections("me", "friends")
-			#user.likes = @@graph.get_connections("me", "likes")
+			user.likes = @@graph.get_connections("me", "likes")
 			
 				mutual_friends = []
 				users = []
@@ -82,11 +82,8 @@ class User < ActiveRecord::Base
 		return self.friends.values.include?(user.facebook_id)
 	end
 	
-
-
-	
 	NAME = KNOWN_AS = /^\s*Name:\s*$/i
-	KNOWN_AS = /^\s*Known As:\s*$/i
+	KNOWN_AS ||= /^\s*Known As:\s*$/i
 	EMAIL = /^\s*Email Address:\s*$/i
 	YEAR = /^\s*Class Year:\s*$/i
 	SCHOOL = /^\s*Division:\s*$/i
@@ -94,8 +91,7 @@ class User < ActiveRecord::Base
 	LEAD_SPACE = /^\s+/
 	TRAIL_SPACE = /\s+$/
 
-
-	def make_cas_browser
+		def make_cas_browser
 	  browser = Mechanize.new
 	  browser.get( 'https://secure.its.yale.edu/cas/login' )
 	  form = browser.page.forms.first
@@ -161,42 +157,10 @@ class User < ActiveRecord::Base
 		sched.updated_at.today?
 	end		 
 
-	def find_matches(user)
-		return unless user.has_valid_schedule?
-		potential_matches = []
-		today = Time.now.strftime("%A")
-		sched1 = user.schedules.where("day = ?", today).first
-		user.matchings.where("status = ?", "accepted").each do |match|
-			
-			friend = User.find(match.match_id)
-			if friend.has_valid_schedule?
-				sched2 = friend.schedules.where("day = ?", today).first
-				
-				if sched1.location != sched2.location
-				elsif sched1.overlap_between_time_windows(sched1, sched2) < 30	
-				else
-					potential_matches << friend
-				end
-			end
-		end
-		return potential_matches
-	end	
-
-
 	#validates :phone, :gender, presence: true
 	#validates :handle, uniqueness: { case_sensitive: false }
 	validates :phone, format: { with: /[0-9]+/,
     message: "Only use numbers" }
-
-	
-	NAME = KNOWN_AS = /^\s*Name:\s*$/i
-	KNOWN_AS ||= /^\s*Known As:\s*$/i
-	EMAIL = /^\s*Email Address:\s*$/i
-	YEAR = /^\s*Class Year:\s*$/i
-	SCHOOL = /^\s*Division:\s*$/i
-	COLLEGE = /^\s*Residential College:\s*$/i
-	LEAD_SPACE = /^\s+/
-	TRAIL_SPACE = /\s+$/
 
 
 	private
