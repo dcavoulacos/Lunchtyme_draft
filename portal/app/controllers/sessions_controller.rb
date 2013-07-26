@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
 	def logout
 		session = nil
 		@current_user = nil
-		logout_url = root_path
 		CASClient::Frameworks::Rails::Filter.logout(self, root_path)
 	end
 end

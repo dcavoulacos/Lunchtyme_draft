@@ -6,7 +6,7 @@ class MatchingsController < ApplicationController
   def create
     Matching.create(user_id: current_user.id, match_id: @user.id, status: 'pending')
     respond_to do |format|
-      format.html { redirect_to users_path }
+      format.html { redirect_to profile_path }
     end
   end
 
@@ -18,7 +18,7 @@ class MatchingsController < ApplicationController
   #   else
 	 #    current_user.matchings.create(match_id: params[:match_id], status: 'pending')
 	 #    respond_to do |format|
-	 #        format.html { redirect_to users_path, notice: 'Match preference noted.' }
+	 #        format.html { redirect_to profile_path }
 	 #    end
 	 #  end
   # end

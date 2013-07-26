@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 	validates :phone, format: { with: /[0-9]{10}/, message: "Please Insert a Valid Phone Number" }
 
 
+	#after_create :send_welcome_email
+
+	
+
 
 
 	def self.update_via_omniauth!(auth, user)
@@ -157,5 +161,12 @@ class User < ActiveRecord::Base
 	#validates :handle, uniqueness: { case_sensitive: false }
 	validates :phone, format: { with: /[0-9]+/,
     message: "Only use numbers" }
+
+
+	private
+
+	def send_welcome_email
+ 		UserMailer.welcome_email(self).deliver
+	end
 
 end
