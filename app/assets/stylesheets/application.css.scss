@@ -18,25 +18,24 @@
 	float: right;
 	margin-top: 21px;
 	padding-bottom: 5px;
-	-webkit-transition: border-bottom .2s ease-in-out;
-	border-bottom: 2px solid #ffffff;
 }
 
 #user_nav1 a{
-			
+			border-bottom: 2px solid rgba(0, 0, 0, .0);
+			text-decoration: none;
 			/*text-transform:uppercase;*/
 			color:#FFFFFF;
 			}
-			.header2 A:link {color: #FFFFFF; text-decoration: none} 
-			.header2 A:visited {color: #FFFFFF; text-decoration: none} 
-			.header2 A:active {color: #FFFFFF; text-decoration: none} 
-			.header2 A:hover {color: #42C0FB; text-decoration: none; border-bottom:2px solid rgba(255, 255, 255, 1);  -webkit-transition: border-bottom .2s ease-in-out;}
+			#user_nav1 A:link {color: #FFFFFF; text-decoration: none; font-size: 23px;} 
+			#user_nav1 A:visited {color: #FFFFFF; text-decoration: none} 
+			#user_nav1 A:active {color: #FFFFFF; text-decoration: none} 
+			#user_nav1 A:hover {color: #006eba; text-decoration: none; border-bottom:2px solid rgba(255, 255, 255, 1);  -webkit-transition: border-bottom .2s ease-in-out;}
 
 #user_nav2 {
 	width: auto;
 	float: right;
 	margin-top: 39px;
-	margin-right: 40px;
+	margin-right: 45px;
 	margin-left: 40px;
 }
 

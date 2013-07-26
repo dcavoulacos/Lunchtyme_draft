@@ -19,7 +19,7 @@
 		</div>
 		<div id="user_nav1">
 			<% if @current_user %>
-				Hello, <b><%= link_to @current_user.first_name, profile_path %></b>!
+				Hello, <b><%= link_to @current_user.first_name, profile_path %></b>&nbsp!
 			<% else %>
 				<%= link_to "Sign in with CAS & Facebook", profile_path, id: "sign_in" %>
 			<% end %>
