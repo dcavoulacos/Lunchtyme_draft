@@ -21,13 +21,6 @@
 				<%= link_to "Sign in with CAS & Facebook", profile_path, id: "sign_in" %>
 			<% end %>
 		</div>
-		<div class="sidebar">
-			<%#= link_to 'Profile', @current_user %> 
-		    <%# if @current_user.matchings.find_by(match_id: user.id, status: 'pending').size > 5 %>
-		    <%# else %>
-		      <%#= link_to 'Add More Friends to Your Lunch List!', profile_path %>
-		    <%# end %>
-		</div>
 	</div>
 
 <%= yield %>

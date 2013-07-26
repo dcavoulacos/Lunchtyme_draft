@@ -18,10 +18,10 @@ Portal::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'mail.yale.edu',
+    address:              'smtp.gmail.com',
     port:                 587,
-    user_name:            'asg4',
-    password:             'zugzwang12',
+    user_name:            'andrewg19',
+    password:             'zugzwang1',
     authentication:       'plain',
     enable_starttls_auto: true  }
 
