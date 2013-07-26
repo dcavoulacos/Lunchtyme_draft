@@ -8,6 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="user_nav2">
+			<% if @current_user %>
+			<%= link_to(image_tag("sign_out.png"), logout_path, id: "sign_out") %>
+			<% end %>
+	</div>
 	<div class="header">
 		<div class="lunchtyme">
 			<%= link_to(image_tag("lunchtyme.png", :alt => "Home"), root_path) %>
@@ -15,7 +20,6 @@
 		<div id="user_nav1">
 			<% if @current_user %>
 				Hello, <b><%= link_to @current_user.first_name, profile_path %></b>!
-				<%= link_to "Sign out", logout_path, id: "sign_out" %>
 			<% else %>
 				<%= link_to "Sign in with CAS & Facebook", profile_path, id: "sign_in" %>
 			<% end %>
