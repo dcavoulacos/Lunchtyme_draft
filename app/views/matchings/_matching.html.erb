@@ -1,8 +1,8 @@
- <table class="lunch-list">
+<table class="lunch-list">
   <tbody>
     <% i = 1 %>
     <% matches = @current_user.matchings.where(user_id: @current_user.id).sort_by{|i| i.created_at}.reverse %>
-    <% iterations = (matches.size/8) + 1  %>
+    <% iterations = (matches.size/10) + 1  %>
     <% while i <= iterations %>
       <tr>
       <% matches.each do |match| %> 
