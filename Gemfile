@@ -5,7 +5,13 @@ gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.7', group: :development
-gem 'pg', group: :production
+
+group :production do
+	gem "rails_12factor"
+	gem 'pg'
+end
+
+gem 'unicorn'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -73,8 +79,6 @@ group :development do
   gem "binding_of_caller"
 end
 
-
-#gem 'rubycas-client'
 gem 'mechanize' 
 
 gem 'whenever', require: false
